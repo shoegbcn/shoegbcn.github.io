@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="en">
+    <!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+    <!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->
+    <head>
+        <title>WebXR Application</title>
+        <link rel="icon" type="image/png" href="favicon.ico"/>
+        <meta name="description" content="3D Application">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+        <script type="text/javascript" src="js/webxr.js"></script>
+        <script type="text/javascript" src="js/joystick.js"></script>
+        <script type="text/javascript" src="js/camera-cube-env.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body onload="init();">
+        <a-scene stats  shadow="type: basic; autoUpdate: false;" renderer="antialias: true; colorManagement: true; physicallyCorrectLights: false; sortTransparentObjects: true; logarithmicDepthBuffer: true; precision: high; anisotropy: 2;">
+            <!-- Assets -->
+            <a-assets>
+				<a-asset-item id="algae_h_1" src="./assets/algae_h_1.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_10" src="./assets/algae_h_10.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_11" src="./assets/algae_h_11.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_12" src="./assets/algae_h_12.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_13" src="./assets/algae_h_13.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_14" src="./assets/algae_h_14.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_2" src="./assets/algae_h_2.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_3" src="./assets/algae_h_3.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_4" src="./assets/algae_h_4.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_5" src="./assets/algae_h_5.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_6" src="./assets/algae_h_6.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_7" src="./assets/algae_h_7.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_8" src="./assets/algae_h_8.gltf"></a-asset-item>
+				<a-asset-item id="algae_h_9" src="./assets/algae_h_9.gltf"></a-asset-item>
+				<a-asset-item id="AlienPlant_1_Blob" src="./assets/AlienPlant_1_Blob.gltf"></a-asset-item>
+				<a-asset-item id="AlienPlant_1_Border" src="./assets/AlienPlant_1_Border.gltf"></a-asset-item>
+				<a-asset-item id="AlienPlant_1_EELeaf_1" src="./assets/AlienPlant_1_EELeaf_1.gltf"></a-asset-item>
+				<a-asset-item id="AlienPlant_1_EELeaf_2" src="./assets/AlienPlant_1_EELeaf_2.gltf"></a-asset-item>
+				<a-asset-item id="AlienPlant_1_EELeaf_3" src="./assets/AlienPlant_1_EELeaf_3.gltf"></a-asset-item>
+				<a-asset-item id="AlienPlant_1_PhLeaf_1" src="./assets/AlienPlant_1_PhLeaf_1.gltf"></a-asset-item>
+				<a-asset-item id="AlienPlant_1_PhLeaf_2" src="./assets/AlienPlant_1_PhLeaf_2.gltf"></a-asset-item>
+				<a-asset-item id="AlienPlant_1_Roots_1" src="./assets/AlienPlant_1_Roots_1.gltf"></a-asset-item>
+				<a-asset-item id="AlienPlant_1_WLily" src="./assets/AlienPlant_1_WLily.gltf"></a-asset-item>
+				<a-asset-item id="BananaPlant_1_Branch" src="./assets/BananaPlant_1_Branch.gltf"></a-asset-item>
+				<a-asset-item id="BananaPlant_1_Leaf_1" src="./assets/BananaPlant_1_Leaf_1.gltf"></a-asset-item>
+				<a-asset-item id="BananaPlant_1_Leaf_2" src="./assets/BananaPlant_1_Leaf_2.gltf"></a-asset-item>
+				<a-asset-item id="BananaPlant_1_Leaf_3" src="./assets/BananaPlant_1_Leaf_3.gltf"></a-asset-item>
+				<a-asset-item id="BananaPlant_2_Branch" src="./assets/BananaPlant_2_Branch.gltf"></a-asset-item>
+				<a-asset-item id="BananaPlant_2_Leaf_1" src="./assets/BananaPlant_2_Leaf_1.gltf"></a-asset-item>
+				<a-asset-item id="BaseBottom_1" src="./assets/BaseBottom_1.gltf"></a-asset-item>
+				<a-asset-item id="BaseColumn_1" src="./assets/BaseColumn_1.gltf"></a-asset-item>
+				<a-asset-item id="BaseColumn_2" src="./assets/BaseColumn_2.gltf"></a-asset-item>
+				<a-asset-item id="BaseDec_1" src="./assets/BaseDec_1.gltf"></a-asset-item>
+				<a-asset-item id="BaseDec_2" src="./assets/BaseDec_2.gltf"></a-asset-item>
+				<a-asset-item id="BaseTop_1" src="./assets/BaseTop_1.gltf"></a-asset-item>
+				<a-asset-item id="BaseWires_1" src="./assets/BaseWires_1.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_1" src="./assets/BlueBlocks_1.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_10" src="./assets/BlueBlocks_10.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_11" src="./assets/BlueBlocks_11.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_12" src="./assets/BlueBlocks_12.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_13" src="./assets/BlueBlocks_13.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_14" src="./assets/BlueBlocks_14.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_15" src="./assets/BlueBlocks_15.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_16" src="./assets/BlueBlocks_16.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_17" src="./assets/BlueBlocks_17.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_18" src="./assets/BlueBlocks_18.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_19" src="./assets/BlueBlocks_19.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_2" src="./assets/BlueBlocks_2.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_21" src="./assets/BlueBlocks_21.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_22" src="./assets/BlueBlocks_22.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_23" src="./assets/BlueBlocks_23.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_24" src="./assets/BlueBlocks_24.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_3" src="./assets/BlueBlocks_3.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_4" src="./assets/BlueBlocks_4.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_5" src="./assets/BlueBlocks_5.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_6" src="./assets/BlueBlocks_6.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_7" src="./assets/BlueBlocks_7.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_8" src="./assets/BlueBlocks_8.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_9" src="./assets/BlueBlocks_9.gltf"></a-asset-item>
+				<a-asset-item id="BSPlant_1_Leaf_1" src="./assets/BSPlant_1_Leaf_1.gltf"></a-asset-item>
+				<a-asset-item id="BSPlant_1_Leaf_2" src="./assets/BSPlant_1_Leaf_2.gltf"></a-asset-item>
+				<a-asset-item id="BSPlant_1_Leaf_3" src="./assets/BSPlant_1_Leaf_3.gltf"></a-asset-item>
+				<a-asset-item id="BSPlant_1_Stem" src="./assets/BSPlant_1_Stem.gltf"></a-asset-item>
+				<a-asset-item id="BSPlant_2_Leaf_1" src="./assets/BSPlant_2_Leaf_1.gltf"></a-asset-item>
+				<a-asset-item id="BSPlant_2_Leaf_2" src="./assets/BSPlant_2_Leaf_2.gltf"></a-asset-item>
+				<a-asset-item id="BSPlant_2_Leaf_3" src="./assets/BSPlant_2_Leaf_3.gltf"></a-asset-item>
+				<a-asset-item id="BSPlant_2_Leaf_4" src="./assets/BSPlant_2_Leaf_4.gltf"></a-asset-item>
+				<a-asset-item id="BSPlant_2_Leaf_5" src="./assets/BSPlant_2_Leaf_5.gltf"></a-asset-item>
+				<a-asset-item id="BSPlant_2_Stem" src="./assets/BSPlant_2_Stem.gltf"></a-asset-item>
+				<a-asset-item id="BSPlant_2_Stem_2" src="./assets/BSPlant_2_Stem_2.gltf"></a-asset-item>
+				<a-asset-item id="BSPlant_2_Stem_3" src="./assets/BSPlant_2_Stem_3.gltf"></a-asset-item>
+				<a-asset-item id="BT_1" src="./assets/BT_1.gltf"></a-asset-item>
+				<a-asset-item id="BT_1_F_1_1" src="./assets/BT_1_F_1_1.gltf"></a-asset-item>
+				<a-asset-item id="BT_1_F_1_2" src="./assets/BT_1_F_1_2.gltf"></a-asset-item>
+				<a-asset-item id="BT_1_F_1_3" src="./assets/BT_1_F_1_3.gltf"></a-asset-item>
+				<a-asset-item id="BT_1_F_2_1" src="./assets/BT_1_F_2_1.gltf"></a-asset-item>
+				<a-asset-item id="BT_1_F_2_2" src="./assets/BT_1_F_2_2.gltf"></a-asset-item>
+				<a-asset-item id="BT_1_F_3_1" src="./assets/BT_1_F_3_1.gltf"></a-asset-item>
+				<a-asset-item id="BT_1_F_3_2" src="./assets/BT_1_F_3_2.gltf"></a-asset-item>
+				<a-asset-item id="BT_1_F_4" src="./assets/BT_1_F_4.gltf"></a-asset-item>
+				<a-asset-item id="BT_2" src="./assets/BT_2.gltf"></a-asset-item>
+				<a-asset-item id="BT_2_F_1_1" src="./assets/BT_2_F_1_1.gltf"></a-asset-item>
+				<a-asset-item id="BT_2_F_1_2" src="./assets/BT_2_F_1_2.gltf"></a-asset-item>
+				<a-asset-item id="BT_2_F_1_3" src="./assets/BT_2_F_1_3.gltf"></a-asset-item>
+				<a-asset-item id="BT_3" src="./assets/BT_3.gltf"></a-asset-item>
+				<a-asset-item id="BT_3_F_1_1" src="./assets/BT_3_F_1_1.gltf"></a-asset-item>
+				<a-asset-item id="BT_3_F_1_2" src="./assets/BT_3_F_1_2.gltf"></a-asset-item>
+				<a-asset-item id="BT_3_F_1_3" src="./assets/BT_3_F_1_3.gltf"></a-asset-item>
+				<a-asset-item id="BT_3_F_2" src="./assets/BT_3_F_2.gltf"></a-asset-item>
+				<a-asset-item id="BT_4" src="./assets/BT_4.gltf"></a-asset-item>
+				<a-asset-item id="BT_4_F_1_1" src="./assets/BT_4_F_1_1.gltf"></a-asset-item>
+				<a-asset-item id="BT_4_F_1_2" src="./assets/BT_4_F_1_2.gltf"></a-asset-item>
+				<a-asset-item id="BT_4_F_1_3" src="./assets/BT_4_F_1_3.gltf"></a-asset-item>
+				<a-asset-item id="BT_5" src="./assets/BT_5.gltf"></a-asset-item>
+				<a-asset-item id="BT_5_F_1_1" src="./assets/BT_5_F_1_1.gltf"></a-asset-item>
+				<a-asset-item id="BT_5_F_1_2" src="./assets/BT_5_F_1_2.gltf"></a-asset-item>
+				<a-asset-item id="BT_5_F_1_3" src="./assets/BT_5_F_1_3.gltf"></a-asset-item>
+				<a-asset-item id="BT_5_F_2_1" src="./assets/BT_5_F_2_1.gltf"></a-asset-item>
+				<a-asset-item id="BT_5_F_2_2" src="./assets/BT_5_F_2_2.gltf"></a-asset-item>
+				<a-asset-item id="BT_6" src="./assets/BT_6.gltf"></a-asset-item>
+				<a-asset-item id="BT_6_F_1_1" src="./assets/BT_6_F_1_1.gltf"></a-asset-item>
+				<a-asset-item id="BT_6_F_1_2" src="./assets/BT_6_F_1_2.gltf"></a-asset-item>
+				<a-asset-item id="BT_6_F_1_3" src="./assets/BT_6_F_1_3.gltf"></a-asset-item>
+				<a-asset-item id="BT_7" src="./assets/BT_7.gltf"></a-asset-item>
+				<a-asset-item id="BT_7_F_1_1" src="./assets/BT_7_F_1_1.gltf"></a-asset-item>
+				<a-asset-item id="BT_7_F_1_2" src="./assets/BT_7_F_1_2.gltf"></a-asset-item>
+				<a-asset-item id="BT_7_F_1_3" src="./assets/BT_7_F_1_3.gltf"></a-asset-item>
+				<a-asset-item id="BT_8" src="./assets/BT_8.gltf"></a-asset-item>
+				<a-asset-item id="BurntTree_1" src="./assets/BurntTree_1.gltf"></a-asset-item>
+				<a-asset-item id="BurntTree_1_B_1" src="./assets/BurntTree_1_B_1.gltf"></a-asset-item>
+				<a-asset-item id="BurntTree_1_B_2" src="./assets/BurntTree_1_B_2.gltf"></a-asset-item>
+				<a-asset-item id="BurntTree_2" src="./assets/BurntTree_2.gltf"></a-asset-item>
+				<a-asset-item id="BurntTree_2_B_1" src="./assets/BurntTree_2_B_1.gltf"></a-asset-item>
+				<a-asset-item id="BurntTree_2_B_2" src="./assets/BurntTree_2_B_2.gltf"></a-asset-item>
+				<a-asset-item id="BurntTree_2_B_3" src="./assets/BurntTree_2_B_3.gltf"></a-asset-item>
+				<a-asset-item id="BurntTree_3" src="./assets/BurntTree_3.gltf"></a-asset-item>
+				<a-asset-item id="BurntTree_4" src="./assets/BurntTree_4.gltf"></a-asset-item>
+				<a-asset-item id="BurntTree_5" src="./assets/BurntTree_5.gltf"></a-asset-item>
+				<a-asset-item id="BurntTree_5_B_1" src="./assets/BurntTree_5_B_1.gltf"></a-asset-item>
+				<a-asset-item id="BurntTree_5_B_2" src="./assets/BurntTree_5_B_2.gltf"></a-asset-item>
+				<a-asset-item id="Climbing_Ivy_1" src="./assets/Climbing_Ivy_1.gltf"></a-asset-item>
+				<a-asset-item id="Climbing_Ivy_2" src="./assets/Climbing_Ivy_2.gltf"></a-asset-item>
+				<a-asset-item id="Climbing_Ivy_3" src="./assets/Climbing_Ivy_3.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_1_Lat" src="./assets/ColdZone_1_Lat.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_1_Lat_2" src="./assets/ColdZone_1_Lat_2.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_1_Top" src="./assets/ColdZone_1_Top.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_Blob" src="./assets/ColdZone_Blob.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_Log" src="./assets/ColdZone_Log.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_Log_Liquen" src="./assets/ColdZone_Log_Liquen.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_Log_S_1" src="./assets/ColdZone_Log_S_1.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_Log_S_2" src="./assets/ColdZone_Log_S_2.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_Log_S_3" src="./assets/ColdZone_Log_S_3.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_Log_S_4" src="./assets/ColdZone_Log_S_4.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_Log_S_5" src="./assets/ColdZone_Log_S_5.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_Log_S_6" src="./assets/ColdZone_Log_S_6.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_SmallMount_1" src="./assets/ColdZone_SmallMount_1.gltf"></a-asset-item>
+				<a-asset-item id="ColdZone_SmallMount_2" src="./assets/ColdZone_SmallMount_2.gltf"></a-asset-item>
+				<a-asset-item id="BlueBlocks_20" src="./assets/BlueBlocks_20.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_1_Lat" src="./assets/CZPlat_1_Lat.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_1_Lat_2" src="./assets/CZPlat_1_Lat_2.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_1_Top" src="./assets/CZPlat_1_Top.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_2_Lat" src="./assets/CZPlat_2_Lat.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_2_Lat_2" src="./assets/CZPlat_2_Lat_2.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_2_Top" src="./assets/CZPlat_2_Top.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_3_Lat" src="./assets/CZPlat_3_Lat.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_3_Top" src="./assets/CZPlat_3_Top.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_4_Lat" src="./assets/CZPlat_4_Lat.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_4_Lat_2" src="./assets/CZPlat_4_Lat_2.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_4_Top" src="./assets/CZPlat_4_Top.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_5_Lat" src="./assets/CZPlat_5_Lat.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_5_Lat_2" src="./assets/CZPlat_5_Lat_2.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_5_Top" src="./assets/CZPlat_5_Top.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_6_Lat" src="./assets/CZPlat_6_Lat.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_6_Top" src="./assets/CZPlat_6_Top.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_7_Lat" src="./assets/CZPlat_7_Lat.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_7_Lat_2" src="./assets/CZPlat_7_Lat_2.gltf"></a-asset-item>
+				<a-asset-item id="CZPlat_7_Top" src="./assets/CZPlat_7_Top.gltf"></a-asset-item>
+				<a-asset-item id="CZSnowB_1" src="./assets/CZSnowB_1.gltf"></a-asset-item>
+				<a-asset-item id="FallenLog_1" src="./assets/FallenLog_1.gltf"></a-asset-item>
+				<a-asset-item id="Floor_1" src="./assets/Floor_1.gltf"></a-asset-item>
+				<a-asset-item id="Floor_1.001" src="./assets/Floor_1.001.gltf"></a-asset-item>
+				<a-asset-item id="Floor_GreenStrips" src="./assets/Floor_GreenStrips.gltf"></a-asset-item>
+				<a-asset-item id="Floor_GreenStrips.001" src="./assets/Floor_GreenStrips.001.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_AlgTree_1" src="./assets/Forest_1_AlgTree_1.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_AlgTree_2" src="./assets/Forest_1_AlgTree_2.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Euc_1" src="./assets/Forest_1_Euc_1.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Euc_2" src="./assets/Forest_1_Euc_2.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Euc_3" src="./assets/Forest_1_Euc_3.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Euc_4" src="./assets/Forest_1_Euc_4.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Euc_5" src="./assets/Forest_1_Euc_5.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Euc_6" src="./assets/Forest_1_Euc_6.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_FallenTree" src="./assets/Forest_1_FallenTree.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Rock_1" src="./assets/Forest_1_Rock_1.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Tree_1" src="./assets/Forest_1_Tree_1.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Tree_2" src="./assets/Forest_1_Tree_2.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Tree_3" src="./assets/Forest_1_Tree_3.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Tree_4" src="./assets/Forest_1_Tree_4.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Tree_5" src="./assets/Forest_1_Tree_5.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Tree_6" src="./assets/Forest_1_Tree_6.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_Tree_7" src="./assets/Forest_1_Tree_7.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_VertGrass" src="./assets/Forest_1_VertGrass.gltf"></a-asset-item>
+				<a-asset-item id="Forest_1_VertGrass.001" src="./assets/Forest_1_VertGrass.001.gltf"></a-asset-item>
+				<a-asset-item id="Fungi_1" src="./assets/Fungi_1.gltf"></a-asset-item>
+				<a-asset-item id="Garden_1_Border" src="./assets/Garden_1_Border.gltf"></a-asset-item>
+				<a-asset-item id="Garden_1_Soil" src="./assets/Garden_1_Soil.gltf"></a-asset-item>
+				<a-asset-item id="Garden_2_Border" src="./assets/Garden_2_Border.gltf"></a-asset-item>
+				<a-asset-item id="Garden_2_Soil" src="./assets/Garden_2_Soil.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColC_1" src="./assets/GH_1_ColC_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColC_2" src="./assets/GH_1_ColC_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColC_3" src="./assets/GH_1_ColC_3.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColC_4" src="./assets/GH_1_ColC_4.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColC_5" src="./assets/GH_1_ColC_5.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColC_6" src="./assets/GH_1_ColC_6.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColC_7" src="./assets/GH_1_ColC_7.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColC_8" src="./assets/GH_1_ColC_8.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColL_1" src="./assets/GH_1_ColL_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColL_2" src="./assets/GH_1_ColL_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColL_3" src="./assets/GH_1_ColL_3.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColL_4" src="./assets/GH_1_ColL_4.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColL_5" src="./assets/GH_1_ColL_5.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColL_6" src="./assets/GH_1_ColL_6.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColL_7" src="./assets/GH_1_ColL_7.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColL_8" src="./assets/GH_1_ColL_8.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColR_1" src="./assets/GH_1_ColR_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColR_2" src="./assets/GH_1_ColR_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColR_3" src="./assets/GH_1_ColR_3.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColR_4" src="./assets/GH_1_ColR_4.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColR_5" src="./assets/GH_1_ColR_5.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColR_6" src="./assets/GH_1_ColR_6.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColR_7" src="./assets/GH_1_ColR_7.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_ColR_8" src="./assets/GH_1_ColR_8.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCL_1" src="./assets/GH_1_EmbCL_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCL_2" src="./assets/GH_1_EmbCL_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCL_3" src="./assets/GH_1_EmbCL_3.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCL_4" src="./assets/GH_1_EmbCL_4.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCL_5" src="./assets/GH_1_EmbCL_5.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCL_6" src="./assets/GH_1_EmbCL_6.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCL_7" src="./assets/GH_1_EmbCL_7.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCL_8" src="./assets/GH_1_EmbCL_8.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCR_1" src="./assets/GH_1_EmbCR_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCR_2" src="./assets/GH_1_EmbCR_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCR_3" src="./assets/GH_1_EmbCR_3.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCR_4" src="./assets/GH_1_EmbCR_4.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCR_5" src="./assets/GH_1_EmbCR_5.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCR_6" src="./assets/GH_1_EmbCR_6.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCR_7" src="./assets/GH_1_EmbCR_7.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbCR_8" src="./assets/GH_1_EmbCR_8.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbL_1" src="./assets/GH_1_EmbL_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbL_2" src="./assets/GH_1_EmbL_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbL_3" src="./assets/GH_1_EmbL_3.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbL_4" src="./assets/GH_1_EmbL_4.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbL_5" src="./assets/GH_1_EmbL_5.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbL_6" src="./assets/GH_1_EmbL_6.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbL_7" src="./assets/GH_1_EmbL_7.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbL_8" src="./assets/GH_1_EmbL_8.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbLat_1" src="./assets/GH_1_EmbLat_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbLat_2" src="./assets/GH_1_EmbLat_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbR_1" src="./assets/GH_1_EmbR_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbR_2" src="./assets/GH_1_EmbR_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbR_3" src="./assets/GH_1_EmbR_3.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbR_4" src="./assets/GH_1_EmbR_4.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbR_5" src="./assets/GH_1_EmbR_5.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbR_6" src="./assets/GH_1_EmbR_6.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbR_7" src="./assets/GH_1_EmbR_7.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_EmbR_8" src="./assets/GH_1_EmbR_8.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Floor" src="./assets/GH_1_Floor.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_FloorLat" src="./assets/GH_1_FloorLat.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_GlassCeiling" src="./assets/GH_1_GlassCeiling.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Ivy_1" src="./assets/GH_1_Ivy_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Ivy_10" src="./assets/GH_1_Ivy_10.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Ivy_11" src="./assets/GH_1_Ivy_11.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Ivy_2" src="./assets/GH_1_Ivy_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Ivy_3" src="./assets/GH_1_Ivy_3.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Ivy_4" src="./assets/GH_1_Ivy_4.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Ivy_5" src="./assets/GH_1_Ivy_5.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Ivy_6" src="./assets/GH_1_Ivy_6.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Ivy_7" src="./assets/GH_1_Ivy_7.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Ivy_8" src="./assets/GH_1_Ivy_8.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Ivy_9" src="./assets/GH_1_Ivy_9.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Lily_1" src="./assets/GH_1_Lily_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Lily_2" src="./assets/GH_1_Lily_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Lily_3" src="./assets/GH_1_Lily_3.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Lily_4" src="./assets/GH_1_Lily_4.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Lily_5" src="./assets/GH_1_Lily_5.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Lily_6" src="./assets/GH_1_Lily_6.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Lily_7" src="./assets/GH_1_Lily_7.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofEmb" src="./assets/GH_1_RoofEmb.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofT_1" src="./assets/GH_1_RoofT_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofT_2" src="./assets/GH_1_RoofT_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofT_3" src="./assets/GH_1_RoofT_3.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofT_4" src="./assets/GH_1_RoofT_4.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofT_5" src="./assets/GH_1_RoofT_5.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofT_6" src="./assets/GH_1_RoofT_6.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofT_7" src="./assets/GH_1_RoofT_7.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofT_8" src="./assets/GH_1_RoofT_8.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofTI_1" src="./assets/GH_1_RoofTI_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofTI_2" src="./assets/GH_1_RoofTI_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofTI_3" src="./assets/GH_1_RoofTI_3.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_RoofTI_4" src="./assets/GH_1_RoofTI_4.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Stairs_1" src="./assets/GH_1_Stairs_1.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Stairs_2" src="./assets/GH_1_Stairs_2.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Stairs_3" src="./assets/GH_1_Stairs_3.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Stairs_4" src="./assets/GH_1_Stairs_4.gltf"></a-asset-item>
+				<a-asset-item id="GH_1_Top" src="./assets/GH_1_Top.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Base" src="./assets/H1_BluePlant_Base.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Base2" src="./assets/H1_BluePlant_Base2.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_1" src="./assets/H1_BluePlant_Branch_1.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_10" src="./assets/H1_BluePlant_Branch_10.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_11" src="./assets/H1_BluePlant_Branch_11.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_12" src="./assets/H1_BluePlant_Branch_12.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_13" src="./assets/H1_BluePlant_Branch_13.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_14" src="./assets/H1_BluePlant_Branch_14.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_15" src="./assets/H1_BluePlant_Branch_15.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_16" src="./assets/H1_BluePlant_Branch_16.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_17" src="./assets/H1_BluePlant_Branch_17.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_18" src="./assets/H1_BluePlant_Branch_18.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_2" src="./assets/H1_BluePlant_Branch_2.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_3" src="./assets/H1_BluePlant_Branch_3.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_4" src="./assets/H1_BluePlant_Branch_4.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_5" src="./assets/H1_BluePlant_Branch_5.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_6" src="./assets/H1_BluePlant_Branch_6.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_7" src="./assets/H1_BluePlant_Branch_7.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_8" src="./assets/H1_BluePlant_Branch_8.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Branch_9" src="./assets/H1_BluePlant_Branch_9.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Corona1_1" src="./assets/H1_BluePlant_Corona1_1.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Corona1_2" src="./assets/H1_BluePlant_Corona1_2.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Corona2" src="./assets/H1_BluePlant_Corona2.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Corona2_Center" src="./assets/H1_BluePlant_Corona2_Center.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Corona2_Center2" src="./assets/H1_BluePlant_Corona2_Center2.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Corona2_Center3" src="./assets/H1_BluePlant_Corona2_Center3.gltf"></a-asset-item>
+				<a-asset-item id="H1_BluePlant_Trunk" src="./assets/H1_BluePlant_Trunk.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_Col1" src="./assets/H1_F1_Col1.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_Col2" src="./assets/H1_F1_Col2.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_Col3" src="./assets/H1_F1_Col3.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_Col4" src="./assets/H1_F1_Col4.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_Col5" src="./assets/H1_F1_Col5.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_Col6" src="./assets/H1_F1_Col6.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_Col7" src="./assets/H1_F1_Col7.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_Col8" src="./assets/H1_F1_Col8.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_ColSup1" src="./assets/H1_F1_ColSup1.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_ColSup2" src="./assets/H1_F1_ColSup2.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_CrystalSup" src="./assets/H1_F1_CrystalSup.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_RoofHole" src="./assets/H1_F1_RoofHole.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_W1" src="./assets/H1_F1_W1.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_W2" src="./assets/H1_F1_W2.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_W3" src="./assets/H1_F1_W3.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_W4" src="./assets/H1_F1_W4.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_W5" src="./assets/H1_F1_W5.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_W6" src="./assets/H1_F1_W6.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_W7" src="./assets/H1_F1_W7.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_W8" src="./assets/H1_F1_W8.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_WoodenBlock_1" src="./assets/H1_F1_WoodenBlock_1.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_WoodenBlock_2" src="./assets/H1_F1_WoodenBlock_2.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_WoodenBlock_3" src="./assets/H1_F1_WoodenBlock_3.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_WoodenBlock_4" src="./assets/H1_F1_WoodenBlock_4.gltf"></a-asset-item>
+				<a-asset-item id="H1_F1_WoodenBlock_5" src="./assets/H1_F1_WoodenBlock_5.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col1" src="./assets/H1_F2_Col1.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col10" src="./assets/H1_F2_Col10.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col11" src="./assets/H1_F2_Col11.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col12" src="./assets/H1_F2_Col12.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col13" src="./assets/H1_F2_Col13.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col14" src="./assets/H1_F2_Col14.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col15" src="./assets/H1_F2_Col15.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col16" src="./assets/H1_F2_Col16.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col2" src="./assets/H1_F2_Col2.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col3" src="./assets/H1_F2_Col3.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col4" src="./assets/H1_F2_Col4.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col5" src="./assets/H1_F2_Col5.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col6" src="./assets/H1_F2_Col6.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col7" src="./assets/H1_F2_Col7.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col8" src="./assets/H1_F2_Col8.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Col9" src="./assets/H1_F2_Col9.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Crystal" src="./assets/H1_F2_Crystal.gltf"></a-asset-item>
+				<a-asset-item id="H1_F2_Floor" src="./assets/H1_F2_Floor.gltf"></a-asset-item>
+				<a-asset-item id="H1_Floor" src="./assets/H1_Floor.gltf"></a-asset-item>
+				<a-asset-item id="H1_Floor2" src="./assets/H1_Floor2.gltf"></a-asset-item>
+				<a-asset-item id="H1_Floor2_Lat" src="./assets/H1_Floor2_Lat.gltf"></a-asset-item>
+				<a-asset-item id="H1_Moss_1" src="./assets/H1_Moss_1.gltf"></a-asset-item>
+				<a-asset-item id="H1_Moss_2" src="./assets/H1_Moss_2.gltf"></a-asset-item>
+				<a-asset-item id="H1_Moss_3" src="./assets/H1_Moss_3.gltf"></a-asset-item>
+				<a-asset-item id="H1_Moss_4" src="./assets/H1_Moss_4.gltf"></a-asset-item>
+				<a-asset-item id="H1_Roof" src="./assets/H1_Roof.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Blob1" src="./assets/H1_RPl_Blob1.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Blob2" src="./assets/H1_RPl_Blob2.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Blob3" src="./assets/H1_RPl_Blob3.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Blob4" src="./assets/H1_RPl_Blob4.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Blob5" src="./assets/H1_RPl_Blob5.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Blob6" src="./assets/H1_RPl_Blob6.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Cherry1" src="./assets/H1_RPl_Cherry1.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Cherry2" src="./assets/H1_RPl_Cherry2.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Cherry3" src="./assets/H1_RPl_Cherry3.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Cherry4" src="./assets/H1_RPl_Cherry4.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Cherry5" src="./assets/H1_RPl_Cherry5.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Cherry6" src="./assets/H1_RPl_Cherry6.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Cherry7" src="./assets/H1_RPl_Cherry7.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Cherry8" src="./assets/H1_RPl_Cherry8.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Ext" src="./assets/H1_RPl_Ext.gltf"></a-asset-item>
+				<a-asset-item id="H1_RPl_Trunk" src="./assets/H1_RPl_Trunk.gltf"></a-asset-item>
+				<a-asset-item id="H1_YPl_Blob1" src="./assets/H1_YPl_Blob1.gltf"></a-asset-item>
+				<a-asset-item id="H1_YPl_Blob2" src="./assets/H1_YPl_Blob2.gltf"></a-asset-item>
+				<a-asset-item id="H1_YPl_Blob3" src="./assets/H1_YPl_Blob3.gltf"></a-asset-item>
+				<a-asset-item id="H1_YPl_Blob4" src="./assets/H1_YPl_Blob4.gltf"></a-asset-item>
+				<a-asset-item id="H1_YPl_Blob5" src="./assets/H1_YPl_Blob5.gltf"></a-asset-item>
+				<a-asset-item id="H1_YPl_Blob6" src="./assets/H1_YPl_Blob6.gltf"></a-asset-item>
+				<a-asset-item id="H1_YPl_Ext" src="./assets/H1_YPl_Ext.gltf"></a-asset-item>
+				<a-asset-item id="H1_YPl_Trunk" src="./assets/H1_YPl_Trunk.gltf"></a-asset-item>
+				<a-asset-item id="HighTower" src="./assets/HighTower.gltf"></a-asset-item>
+				<a-asset-item id="HMountains_1" src="./assets/HMountains_1.gltf"></a-asset-item>
+				<a-asset-item id="HMountains_2" src="./assets/HMountains_2.gltf"></a-asset-item>
+				<a-asset-item id="Icicle_Lat" src="./assets/Icicle_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Icicle_Top" src="./assets/Icicle_Top.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Block_1" src="./assets/Island_1_Block_1.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Block_2" src="./assets/Island_1_Block_2.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Block_3" src="./assets/Island_1_Block_3.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Block_4" src="./assets/Island_1_Block_4.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_FlBlock_1" src="./assets/Island_1_FlBlock_1.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Floor_1" src="./assets/Island_1_Floor_1.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Hanging_1" src="./assets/Island_1_Hanging_1.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Hanging_2" src="./assets/Island_1_Hanging_2.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Hanging_3" src="./assets/Island_1_Hanging_3.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Rock_1" src="./assets/Island_1_Rock_1.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Rock_2" src="./assets/Island_1_Rock_2.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Roots_Rock" src="./assets/Island_1_Roots_Rock.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_SlimTree_1" src="./assets/Island_1_SlimTree_1.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_SlimTree_2" src="./assets/Island_1_SlimTree_2.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_TFlower_1" src="./assets/Island_1_TFlower_1.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_TFlower_2" src="./assets/Island_1_TFlower_2.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_TFlower_3" src="./assets/Island_1_TFlower_3.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_TFlower_4" src="./assets/Island_1_TFlower_4.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_TFlower_5" src="./assets/Island_1_TFlower_5.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_TFlower_6" src="./assets/Island_1_TFlower_6.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Tree_1" src="./assets/Island_1_Tree_1.gltf"></a-asset-item>
+				<a-asset-item id="Island_1_Tree_2" src="./assets/Island_1_Tree_2.gltf"></a-asset-item>
+				<a-asset-item id="liquen_1" src="./assets/liquen_1.gltf"></a-asset-item>
+				<a-asset-item id="liquen_2" src="./assets/liquen_2.gltf"></a-asset-item>
+				<a-asset-item id="liquen_3" src="./assets/liquen_3.gltf"></a-asset-item>
+				<a-asset-item id="MountPass_1" src="./assets/MountPass_1.gltf"></a-asset-item>
+				<a-asset-item id="MountPass_1_Ivy_1" src="./assets/MountPass_1_Ivy_1.gltf"></a-asset-item>
+				<a-asset-item id="MountPass_1_Ivy_2" src="./assets/MountPass_1_Ivy_2.gltf"></a-asset-item>
+				<a-asset-item id="MountPass_1_Ivy_3" src="./assets/MountPass_1_Ivy_3.gltf"></a-asset-item>
+				<a-asset-item id="MTree_1" src="./assets/MTree_1.gltf"></a-asset-item>
+				<a-asset-item id="MTree_10" src="./assets/MTree_10.gltf"></a-asset-item>
+				<a-asset-item id="MTree_1_B_1" src="./assets/MTree_1_B_1.gltf"></a-asset-item>
+				<a-asset-item id="MTree_1_B_2" src="./assets/MTree_1_B_2.gltf"></a-asset-item>
+				<a-asset-item id="MTree_1_B_3" src="./assets/MTree_1_B_3.gltf"></a-asset-item>
+				<a-asset-item id="MTree_1_Bch_1" src="./assets/MTree_1_Bch_1.gltf"></a-asset-item>
+				<a-asset-item id="MTree_1_Bch_2" src="./assets/MTree_1_Bch_2.gltf"></a-asset-item>
+				<a-asset-item id="MTree_2" src="./assets/MTree_2.gltf"></a-asset-item>
+				<a-asset-item id="MTree_2_Bch_1" src="./assets/MTree_2_Bch_1.gltf"></a-asset-item>
+				<a-asset-item id="MTree_2_Bch_2" src="./assets/MTree_2_Bch_2.gltf"></a-asset-item>
+				<a-asset-item id="MTree_2_Bch_3" src="./assets/MTree_2_Bch_3.gltf"></a-asset-item>
+				<a-asset-item id="MTree_3" src="./assets/MTree_3.gltf"></a-asset-item>
+				<a-asset-item id="MTree_3_Bch_1" src="./assets/MTree_3_Bch_1.gltf"></a-asset-item>
+				<a-asset-item id="MTree_3_Liquen" src="./assets/MTree_3_Liquen.gltf"></a-asset-item>
+				<a-asset-item id="MTree_4" src="./assets/MTree_4.gltf"></a-asset-item>
+				<a-asset-item id="MTree_4_Bch_1" src="./assets/MTree_4_Bch_1.gltf"></a-asset-item>
+				<a-asset-item id="MTree_4_Bch_2" src="./assets/MTree_4_Bch_2.gltf"></a-asset-item>
+				<a-asset-item id="MTree_5" src="./assets/MTree_5.gltf"></a-asset-item>
+				<a-asset-item id="MTree_5_Bch_1" src="./assets/MTree_5_Bch_1.gltf"></a-asset-item>
+				<a-asset-item id="MTree_6" src="./assets/MTree_6.gltf"></a-asset-item>
+				<a-asset-item id="MTree_6_Bch_1" src="./assets/MTree_6_Bch_1.gltf"></a-asset-item>
+				<a-asset-item id="MTree_6_LIquen" src="./assets/MTree_6_LIquen.gltf"></a-asset-item>
+				<a-asset-item id="MTree_7" src="./assets/MTree_7.gltf"></a-asset-item>
+				<a-asset-item id="MTree_7_B_1" src="./assets/MTree_7_B_1.gltf"></a-asset-item>
+				<a-asset-item id="MTree_7_Bch_1" src="./assets/MTree_7_Bch_1.gltf"></a-asset-item>
+				<a-asset-item id="MTree_7_Bch_2" src="./assets/MTree_7_Bch_2.gltf"></a-asset-item>
+				<a-asset-item id="MTree_8" src="./assets/MTree_8.gltf"></a-asset-item>
+				<a-asset-item id="MTree_8_Bch_1" src="./assets/MTree_8_Bch_1.gltf"></a-asset-item>
+				<a-asset-item id="MTree_8_Bch_2" src="./assets/MTree_8_Bch_2.gltf"></a-asset-item>
+				<a-asset-item id="MTree_9" src="./assets/MTree_9.gltf"></a-asset-item>
+				<a-asset-item id="MTree_9_Bch_1" src="./assets/MTree_9_Bch_1.gltf"></a-asset-item>
+				<a-asset-item id="MTree_9_Liquen" src="./assets/MTree_9_Liquen.gltf"></a-asset-item>
+				<a-asset-item id="PineBase_1" src="./assets/PineBase_1.gltf"></a-asset-item>
+				<a-asset-item id="PineBase_2" src="./assets/PineBase_2.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1" src="./assets/PlateTree_1.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1_Plate_1" src="./assets/PlateTree_1_Plate_1.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1_Plate_10" src="./assets/PlateTree_1_Plate_10.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1_Plate_11" src="./assets/PlateTree_1_Plate_11.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1_Plate_12" src="./assets/PlateTree_1_Plate_12.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1_Plate_2" src="./assets/PlateTree_1_Plate_2.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1_Plate_3" src="./assets/PlateTree_1_Plate_3.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1_Plate_4" src="./assets/PlateTree_1_Plate_4.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1_Plate_5" src="./assets/PlateTree_1_Plate_5.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1_Plate_6" src="./assets/PlateTree_1_Plate_6.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1_Plate_7" src="./assets/PlateTree_1_Plate_7.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1_Plate_8" src="./assets/PlateTree_1_Plate_8.gltf"></a-asset-item>
+				<a-asset-item id="PlateTree_1_Plate_9" src="./assets/PlateTree_1_Plate_9.gltf"></a-asset-item>
+				<a-asset-item id="Rack_1" src="./assets/Rack_1.gltf"></a-asset-item>
+				<a-asset-item id="Rack_2" src="./assets/Rack_2.gltf"></a-asset-item>
+				<a-asset-item id="RedTree_1" src="./assets/RedTree_1.gltf"></a-asset-item>
+				<a-asset-item id="RedTree_10" src="./assets/RedTree_10.gltf"></a-asset-item>
+				<a-asset-item id="RedTree_2" src="./assets/RedTree_2.gltf"></a-asset-item>
+				<a-asset-item id="RedTree_3" src="./assets/RedTree_3.gltf"></a-asset-item>
+				<a-asset-item id="RedTree_4" src="./assets/RedTree_4.gltf"></a-asset-item>
+				<a-asset-item id="RedTree_5" src="./assets/RedTree_5.gltf"></a-asset-item>
+				<a-asset-item id="RedTree_6" src="./assets/RedTree_6.gltf"></a-asset-item>
+				<a-asset-item id="RedTree_8" src="./assets/RedTree_8.gltf"></a-asset-item>
+				<a-asset-item id="RedTree_7" src="./assets/RedTree_7.gltf"></a-asset-item>
+				<a-asset-item id="RedTree_9" src="./assets/RedTree_9.gltf"></a-asset-item>
+				<a-asset-item id="RedTreeBig_1" src="./assets/RedTreeBig_1.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_1_1_Lat" src="./assets/Ridge_1_1_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_1_1_Top" src="./assets/Ridge_1_1_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_1_Lat" src="./assets/Ridge_1_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_1_MossChand" src="./assets/Ridge_1_MossChand.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_1_Rock" src="./assets/Ridge_1_Rock.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_1_Rock_Floor_1" src="./assets/Ridge_1_Rock_Floor_1.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_1_Rock_Floor_2" src="./assets/Ridge_1_Rock_Floor_2.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_1_Rock_Floor_3" src="./assets/Ridge_1_Rock_Floor_3.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_1_Top" src="./assets/Ridge_1_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_2_1_Lat" src="./assets/Ridge_2_1_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_2_1_Top" src="./assets/Ridge_2_1_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_2_2_Lat" src="./assets/Ridge_2_2_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_2_2_Top" src="./assets/Ridge_2_2_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_2_Lat" src="./assets/Ridge_2_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_2_Rock" src="./assets/Ridge_2_Rock.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_2_Top" src="./assets/Ridge_2_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_3_1_Lat" src="./assets/Ridge_3_1_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_3_1_Top" src="./assets/Ridge_3_1_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_3_Lat" src="./assets/Ridge_3_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_3_Rock" src="./assets/Ridge_3_Rock.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_3_Rock_2" src="./assets/Ridge_3_Rock_2.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_3_Top" src="./assets/Ridge_3_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_4_1_Lat" src="./assets/Ridge_4_1_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_4_1_Top" src="./assets/Ridge_4_1_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_4_2_Lat" src="./assets/Ridge_4_2_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_4_2_Top" src="./assets/Ridge_4_2_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_5_1_Lat" src="./assets/Ridge_5_1_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_5_1_Top" src="./assets/Ridge_5_1_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_5_2_Lat" src="./assets/Ridge_5_2_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_5_2_Top" src="./assets/Ridge_5_2_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_5_Lat" src="./assets/Ridge_5_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_5_Top" src="./assets/Ridge_5_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_6_Lat" src="./assets/Ridge_6_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_6_Top" src="./assets/Ridge_6_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_7_1_Lat" src="./assets/Ridge_7_1_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_7_1_Top" src="./assets/Ridge_7_1_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_7_Lat" src="./assets/Ridge_7_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_7_Top" src="./assets/Ridge_7_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_8_Lat" src="./assets/Ridge_8_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_8_Top" src="./assets/Ridge_8_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_9_Lat" src="./assets/Ridge_9_Lat.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_9_Rock" src="./assets/Ridge_9_Rock.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_9_Top" src="./assets/Ridge_9_Top.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_Block_1" src="./assets/Ridge_Block_1.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_Block_2" src="./assets/Ridge_Block_2.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_Block_3" src="./assets/Ridge_Block_3.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_Block_4" src="./assets/Ridge_Block_4.gltf"></a-asset-item>
+				<a-asset-item id="Ridge_Block_5" src="./assets/Ridge_Block_5.gltf"></a-asset-item>
+				<a-asset-item id="SnowCreature_1" src="./assets/SnowCreature_1.gltf"></a-asset-item>
+				<a-asset-item id="SnowCreature_2" src="./assets/SnowCreature_2.gltf"></a-asset-item>
+				<a-asset-item id="SnowCreature_3" src="./assets/SnowCreature_3.gltf"></a-asset-item>
+				<a-asset-item id="SnowCreature_4" src="./assets/SnowCreature_4.gltf"></a-asset-item>
+				<a-asset-item id="SnowCreatureB_1" src="./assets/SnowCreatureB_1.gltf"></a-asset-item>
+				<a-asset-item id="SnowCreatureB_2" src="./assets/SnowCreatureB_2.gltf"></a-asset-item>
+				<a-asset-item id="SnowCreatureB_3" src="./assets/SnowCreatureB_3.gltf"></a-asset-item>
+				<a-asset-item id="SnowCreatureB_4" src="./assets/SnowCreatureB_4.gltf"></a-asset-item>
+				<a-asset-item id="SnowCreatureB_5" src="./assets/SnowCreatureB_5.gltf"></a-asset-item>
+				<a-asset-item id="SnowCreatureB_6" src="./assets/SnowCreatureB_6.gltf"></a-asset-item>
+				<a-asset-item id="SnowyMountain_1" src="./assets/SnowyMountain_1.gltf"></a-asset-item>
+				<a-asset-item id="SnowyMountain_2" src="./assets/SnowyMountain_2.gltf"></a-asset-item>
+				<a-asset-item id="SnowyMountain_3" src="./assets/SnowyMountain_3.gltf"></a-asset-item>
+				<a-asset-item id="SnowyMountain_4" src="./assets/SnowyMountain_4.gltf"></a-asset-item>
+				<a-asset-item id="WoodenPlaza" src="./assets/WoodenPlaza.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_1" src="./assets/WPlant_1.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_2" src="./assets/WPlant_2.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_3_Leaf_1" src="./assets/WPlant_3_Leaf_1.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_3_Leaf_2" src="./assets/WPlant_3_Leaf_2.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_3_Leaf_3" src="./assets/WPlant_3_Leaf_3.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_3_Stem" src="./assets/WPlant_3_Stem.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_4" src="./assets/WPlant_4.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_5_1" src="./assets/WPlant_5_1.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_5_2" src="./assets/WPlant_5_2.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_5_2_Lily_1" src="./assets/WPlant_5_2_Lily_1.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_5_2_Lily_2" src="./assets/WPlant_5_2_Lily_2.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_6_1" src="./assets/WPlant_6_1.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_6_2" src="./assets/WPlant_6_2.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_7_1" src="./assets/WPlant_7_1.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_7_2" src="./assets/WPlant_7_2.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_7_3" src="./assets/WPlant_7_3.gltf"></a-asset-item>
+				<a-asset-item id="WPlant_8" src="./assets/WPlant_8.gltf"></a-asset-item>
+                <img id="sky"                 src="./resources/sky.jpg">
+                <img id="icon-play"           src="./resources/play.png">
+                <img id="icon-pause"          src="./resources/pause.png">
+                <img id="icon-play-skip-back" src="./resources/play-skip-back.png">
+                <img id="icon-mute"           src="./resources/mute.png">
+                <img id="icon-volume-low"     src="./resources/volume-low.png">
+                <img id="icon-volume-high"    src="./resources/volume-high.png">
+            </a-assets>
+
+            <!-- Entities -->
+            
+			<a-entity id="#algae_h_1" gltf-model="#algae_h_1"  scale="1 1 1" position="1.860128402709961 8.483983993530273 23.6630859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_10" gltf-model="#algae_h_10"  scale="1 1 1" position="-6.067022323608398 8.483983993530273 23.6630859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_11" gltf-model="#algae_h_11"  scale="1 1 1" position="-11.351789474487305 8.483983993530273 23.6630859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_12" gltf-model="#algae_h_12"  scale="1 1 1" position="-8.709403991699219 8.483983993530273 23.6630859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_13" gltf-model="#algae_h_13"  scale="1 1 1" position="28.28396987915039 8.483983993530273 23.6630859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_14" gltf-model="#algae_h_14"  scale="1 1 1" position="30.92635726928711 8.483983993530273 23.6630859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_2" gltf-model="#algae_h_2"  scale="1 1 1" position="15.350044250488281 17.894243240356445 -38.413909912109375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_3" gltf-model="#algae_h_3"  scale="1 1 1" position="-26.435138702392578 14.333608627319336 -10.971796035766602" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_4" gltf-model="#algae_h_4"  scale="1 1 1" position="-0.7822532653808594 8.483983993530273 23.6630859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_5" gltf-model="#algae_h_5"  scale="1 1 1" position="-3.4246387481689453 8.483983993530273 23.6630859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_6" gltf-model="#algae_h_6"  scale="1 1 1" position="-26.495059967041016 6.151985168457031 -31.501266479492188" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_7" gltf-model="#algae_h_7"  scale="1 1 1" position="-16.408336639404297 6.605247497558594 -32.8967399597168" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_8" gltf-model="#algae_h_8"  scale="1 1 1" position="-24.056354522705078 8.695489883422852 -24.66400146484375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#algae_h_9" gltf-model="#algae_h_9"  scale="1 1 1" position="-26.29702377319336 13.029021263122559 -24.086986541748047" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#AlienPlant_1_Blob" gltf-model="#AlienPlant_1_Blob"  scale="1 1 1" position="65.11984252929688 27.402400970458984 6.5818023681640625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#AlienPlant_1_Border" gltf-model="#AlienPlant_1_Border"  scale="1 1 1" position="65.59264373779297 22.795429229736328 6.354988098144531" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#AlienPlant_1_EELeaf_1" gltf-model="#AlienPlant_1_EELeaf_1"  scale="1 1 1" position="66.02241516113281 28.546199798583984 6.0193328857421875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#AlienPlant_1_EELeaf_2" gltf-model="#AlienPlant_1_EELeaf_2"  scale="1 1 1" position="65.06155395507812 28.120548248291016 6.295890808105469" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#AlienPlant_1_EELeaf_3" gltf-model="#AlienPlant_1_EELeaf_3"  scale="1 1 1" position="66.7917709350586 26.640872955322266 5.426433563232422" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#AlienPlant_1_PhLeaf_1" gltf-model="#AlienPlant_1_PhLeaf_1"  scale="1 1 1" position="65.47303771972656 26.672183990478516 6.8528289794921875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#AlienPlant_1_PhLeaf_2" gltf-model="#AlienPlant_1_PhLeaf_2"  scale="1 1 1" position="65.2414321899414 27.045528411865234 5.923973083496094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#AlienPlant_1_Roots_1" gltf-model="#AlienPlant_1_Roots_1"  scale="1 1 1" position="65.59562683105469 25.271282196044922 6.388641357421875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#AlienPlant_1_WLily" gltf-model="#AlienPlant_1_WLily"  scale="1 1 1" position="65.51183319091797 22.57248306274414 6.345893859863281" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BananaPlant_1_Branch" gltf-model="#BananaPlant_1_Branch"  scale="1 1 1" position="68.44557189941406 24.180152893066406 3.8016929626464844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BananaPlant_1_Leaf_1" gltf-model="#BananaPlant_1_Leaf_1"  scale="1 1 1" position="67.42654418945312 26.536449432373047 3.2740478515625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BananaPlant_1_Leaf_2" gltf-model="#BananaPlant_1_Leaf_2"  scale="1 1 1" position="68.61981201171875 26.93315887451172 2.6495819091796875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BananaPlant_1_Leaf_3" gltf-model="#BananaPlant_1_Leaf_3"  scale="1 1 1" position="68.94377136230469 26.38705062866211 5.188438415527344" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BananaPlant_2_Branch" gltf-model="#BananaPlant_2_Branch"  scale="1 1 1" position="63.336509704589844 23.475502014160156 10.379692077636719" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BananaPlant_2_Leaf_1" gltf-model="#BananaPlant_2_Leaf_1"  scale="1 1 1" position="63.54762268066406 25.11359405517578 11.243999481201172" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BaseBottom_1" gltf-model="#BaseBottom_1"  scale="1 1 1" position="-11.937541961669922 30.10845375061035 -90.50039672851562" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BaseColumn_1" gltf-model="#BaseColumn_1"  scale="1 1 1" position="-15.099102020263672 33.62300491333008 -91.17324829101562" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BaseColumn_2" gltf-model="#BaseColumn_2"  scale="1 1 1" position="-8.757833480834961 33.62300491333008 -90.67083740234375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BaseDec_1" gltf-model="#BaseDec_1"  scale="1 1 1" position="-11.905567169189453 22.306095123291016 -90.982177734375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BaseDec_2" gltf-model="#BaseDec_2"  scale="1 1 1" position="-11.905567169189453 21.628524780273438 -90.982177734375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BaseTop_1" gltf-model="#BaseTop_1"  scale="1 1 1" position="-11.905567169189453 36.517330169677734 -90.89407348632812" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BaseWires_1" gltf-model="#BaseWires_1"  scale="1 1 1" position="-13.12874984741211 21.01105308532715 -90.19258117675781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_1" gltf-model="#BlueBlocks_1"  scale="1 1 1" position="-103.30255126953125 38.2937126159668 -161.65419006347656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_10" gltf-model="#BlueBlocks_10"  scale="1 1 1" position="-120.79193878173828 100.44131469726562 -161.47940063476562" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_11" gltf-model="#BlueBlocks_11"  scale="1 1 1" position="-103.84869384765625 81.52056884765625 -177.8173370361328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_12" gltf-model="#BlueBlocks_12"  scale="1 1 1" position="-147.6319580078125 84.97172546386719 -162.7351531982422" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_13" gltf-model="#BlueBlocks_13"  scale="1 1 1" position="-145.53753662109375 79.4138412475586 -137.6178436279297" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_14" gltf-model="#BlueBlocks_14"  scale="1 1 1" position="-93.52388000488281 94.97988891601562 -182.031005859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_15" gltf-model="#BlueBlocks_15"  scale="1 1 1" position="-157.99386596679688 21.814334869384766 -155.0930633544922" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_16" gltf-model="#BlueBlocks_16"  scale="1 1 1" position="-141.86155700683594 133.03207397460938 -179.49620056152344" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_17" gltf-model="#BlueBlocks_17"  scale="1 1 1" position="-86.14570617675781 49.54446029663086 -157.4638214111328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_18" gltf-model="#BlueBlocks_18"  scale="1 1 1" position="-106.91503143310547 112.09537506103516 -184.0706329345703" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_19" gltf-model="#BlueBlocks_19"  scale="1 1 1" position="-113.86619567871094 92.65424346923828 -169.8581085205078" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_2" gltf-model="#BlueBlocks_2"  scale="1 1 1" position="-113.86619567871094 92.65424346923828 -169.8581085205078" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_21" gltf-model="#BlueBlocks_21"  scale="1 1 1" position="-131.4309539794922 43.51958465576172 -165.37054443359375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_22" gltf-model="#BlueBlocks_22"  scale="1 1 1" position="-93.87887573242188 144.05079650878906 -178.75257873535156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_23" gltf-model="#BlueBlocks_23"  scale="1 1 1" position="-113.86619567871094 -6.573738098144531 -169.8581085205078" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_24" gltf-model="#BlueBlocks_24"  scale="1 1 1" position="-178.52789306640625 112.09537506103516 -173.66529846191406" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_3" gltf-model="#BlueBlocks_3"  scale="1 1 1" position="-133.7608184814453 21.576475143432617 -169.17971801757812" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_4" gltf-model="#BlueBlocks_4"  scale="1 1 1" position="-99.03138732910156 57.0842170715332 -202.0030517578125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_5" gltf-model="#BlueBlocks_5"  scale="1 1 1" position="-128.7362518310547 64.40538024902344 -184.87777709960938" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_6" gltf-model="#BlueBlocks_6"  scale="1 1 1" position="-113.86619567871094 92.65424346923828 -169.8581085205078" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_7" gltf-model="#BlueBlocks_7"  scale="1 1 1" position="-159.53469848632812 19.60558319091797 -132.78341674804688" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_8" gltf-model="#BlueBlocks_8"  scale="1 1 1" position="-169.81394958496094 38.2937126159668 -186.79638671875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_9" gltf-model="#BlueBlocks_9"  scale="1 1 1" position="-177.3340301513672 70.11750030517578 -174.82772827148438" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BSPlant_1_Leaf_1" gltf-model="#BSPlant_1_Leaf_1"  scale="1 1 1" position="3.805668830871582 5.124844551086426 3.9753990173339844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BSPlant_1_Leaf_2" gltf-model="#BSPlant_1_Leaf_2"  scale="1 1 1" position="2.3747596740722656 4.283400535583496 1.9580421447753906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BSPlant_1_Leaf_3" gltf-model="#BSPlant_1_Leaf_3"  scale="1 1 1" position="4.366429328918457 4.033543586730957 2.012126922607422" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BSPlant_1_Stem" gltf-model="#BSPlant_1_Stem"  scale="1 1 1" position="3.2026195526123047 2.679490089416504 2.8598556518554688" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BSPlant_2_Leaf_1" gltf-model="#BSPlant_2_Leaf_1"  scale="1 1 1" position="-3.1951427459716797 3.6500778198242188 -3.1734142303466797" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BSPlant_2_Leaf_2" gltf-model="#BSPlant_2_Leaf_2"  scale="1 1 1" position="-1.7166328430175781 3.094196319580078 -4.082637786865234" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BSPlant_2_Leaf_3" gltf-model="#BSPlant_2_Leaf_3"  scale="1 1 1" position="-3.304769515991211 3.118710517883301 -4.790445327758789" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BSPlant_2_Leaf_4" gltf-model="#BSPlant_2_Leaf_4"  scale="1 1 1" position="-4.220611572265625 3.0495834350585938 -3.595233917236328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BSPlant_2_Leaf_5" gltf-model="#BSPlant_2_Leaf_5"  scale="1 1 1" position="-2.5570507049560547 3.2923450469970703 -5.061395645141602" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BSPlant_2_Stem" gltf-model="#BSPlant_2_Stem"  scale="1 1 1" position="-2.8884639739990234 1.9189157485961914 -4.148721694946289" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BSPlant_2_Stem_2" gltf-model="#BSPlant_2_Stem_2"  scale="1 1 1" position="-2.4979190826416016 1.077982783317566 -3.918367385864258" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BSPlant_2_Stem_3" gltf-model="#BSPlant_2_Stem_3"  scale="1 1 1" position="-3.3920555114746094 0.5413579940795898 -4.232669830322266" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_1" gltf-model="#BT_1"  scale="1 1 1" position="15.556558609008789 18.964134216308594 -39.84535217285156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_1_F_1_1" gltf-model="#BT_1_F_1_1"  scale="1 1 1" position="10.589486122131348 28.003646850585938 -38.565345764160156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_1_F_1_2" gltf-model="#BT_1_F_1_2"  scale="1 1 1" position="10.569992065429688 28.484891891479492 -38.474456787109375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_1_F_1_3" gltf-model="#BT_1_F_1_3"  scale="1 1 1" position="10.549193382263184 28.57101821899414 -38.57146072387695" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_1_F_2_1" gltf-model="#BT_1_F_2_1"  scale="1 1 1" position="9.900250434875488 33.76988220214844 -49.133628845214844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_1_F_2_2" gltf-model="#BT_1_F_2_2"  scale="1 1 1" position="9.900948524475098 34.155399322509766 -49.03844451904297" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_1_F_3_1" gltf-model="#BT_1_F_3_1"  scale="1 1 1" position="18.554920196533203 16.926908493041992 -37.51670837402344" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_1_F_3_2" gltf-model="#BT_1_F_3_2"  scale="1 1 1" position="18.556812286376953 17.341588973999023 -37.52497863769531" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_1_F_4" gltf-model="#BT_1_F_4"  scale="1 1 1" position="19.224872589111328 35.417293548583984 -36.17145538330078" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_2" gltf-model="#BT_2"  scale="1 1 1" position="29.761259078979492 10.919254302978516 -52.69804382324219" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_2_F_1_1" gltf-model="#BT_2_F_1_1"  scale="1 1 1" position="29.648441314697266 22.59518051147461 -52.673736572265625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_2_F_1_2" gltf-model="#BT_2_F_1_2"  scale="1 1 1" position="29.8824462890625 23.033283233642578 -52.546722412109375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_2_F_1_3" gltf-model="#BT_2_F_1_3"  scale="1 1 1" position="29.530927658081055 23.565223693847656 -52.63957214355469" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_3" gltf-model="#BT_3"  scale="1 1 1" position="39.93158721923828 9.00214672088623 -52.25833511352539" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_3_F_1_1" gltf-model="#BT_3_F_1_1"  scale="1 1 1" position="39.759498596191406 20.779245376586914 -52.28778839111328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_3_F_1_2" gltf-model="#BT_3_F_1_2"  scale="1 1 1" position="39.621849060058594 21.17523956298828 -52.48643493652344" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_3_F_1_3" gltf-model="#BT_3_F_1_3"  scale="1 1 1" position="39.81441116333008 21.532081604003906 -52.256874084472656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_3_F_2" gltf-model="#BT_3_F_2"  scale="1 1 1" position="38.89952850341797 15.776549339294434 -52.387908935546875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_4" gltf-model="#BT_4"  scale="1 1 1" position="21.541358947753906 16.973400115966797 -65.96046447753906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_4_F_1_1" gltf-model="#BT_4_F_1_1"  scale="1 1 1" position="23.661376953125 23.969602584838867 -69.6315689086914" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_4_F_1_2" gltf-model="#BT_4_F_1_2"  scale="1 1 1" position="23.652639389038086 24.296100616455078 -69.63709259033203" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_4_F_1_3" gltf-model="#BT_4_F_1_3"  scale="1 1 1" position="23.711956024169922 24.590316772460938 -69.6434555053711" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_5" gltf-model="#BT_5"  scale="1 1 1" position="11.535974502563477 17.57071304321289 -55.943031311035156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_5_F_1_1" gltf-model="#BT_5_F_1_1"  scale="1 1 1" position="10.050749778747559 27.173397064208984 -59.662689208984375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_5_F_1_2" gltf-model="#BT_5_F_1_2"  scale="1 1 1" position="10.120677947998047 27.62429428100586 -59.42030334472656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_5_F_1_3" gltf-model="#BT_5_F_1_3"  scale="1 1 1" position="9.94953727722168 28.171764373779297 -59.71926498413086" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_5_F_2_1" gltf-model="#BT_5_F_2_1"  scale="1 1 1" position="9.25029468536377 22.746471405029297 -51.96269989013672" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_5_F_2_2" gltf-model="#BT_5_F_2_2"  scale="1 1 1" position="9.256975173950195 23.267911911010742 -51.967926025390625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_6" gltf-model="#BT_6"  scale="1 1 1" position="53.662803649902344 12.054586410522461 -90.26895904541016" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_6_F_1_1" gltf-model="#BT_6_F_1_1"  scale="1 1 1" position="53.66227340698242 21.07746124267578 -90.12774658203125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_6_F_1_2" gltf-model="#BT_6_F_1_2"  scale="1 1 1" position="53.661407470703125 21.331125259399414 -90.13804626464844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_6_F_1_3" gltf-model="#BT_6_F_1_3"  scale="1 1 1" position="53.702266693115234 21.559707641601562 -90.09458923339844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_7" gltf-model="#BT_7"  scale="1 1 1" position="31.506805419921875 36.69398880004883 -119.4537353515625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_7_F_1_1" gltf-model="#BT_7_F_1_1"  scale="1 1 1" position="31.469749450683594 44.70320129394531 -119.53318786621094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_7_F_1_2" gltf-model="#BT_7_F_1_2"  scale="1 1 1" position="31.468887329101562 44.95686340332031 -119.54347229003906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_7_F_1_3" gltf-model="#BT_7_F_1_3"  scale="1 1 1" position="31.509742736816406 45.18544387817383 -119.50001525878906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BT_8" gltf-model="#BT_8"  scale="1 1 1" position="28.200057983398438 39.93711471557617 -122.62724304199219" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BurntTree_1" gltf-model="#BurntTree_1"  scale="1 1 1" position="36.55906677246094 8.22332763671875 -4.147741317749023" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BurntTree_1_B_1" gltf-model="#BurntTree_1_B_1"  scale="1 1 1" position="34.759727478027344 8.651505470275879 -7.847715377807617" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BurntTree_1_B_2" gltf-model="#BurntTree_1_B_2"  scale="1 1 1" position="39.2698974609375 7.9894514083862305 -5.193138122558594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BurntTree_2" gltf-model="#BurntTree_2"  scale="1 1 1" position="37.207244873046875 5.772916793823242 4.348091125488281" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BurntTree_2_B_1" gltf-model="#BurntTree_2_B_1"  scale="1 1 1" position="36.37861633300781 6.194604873657227 1.599456787109375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BurntTree_2_B_2" gltf-model="#BurntTree_2_B_2"  scale="1 1 1" position="38.09173583984375 7.222916126251221 2.929718017578125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BurntTree_2_B_3" gltf-model="#BurntTree_2_B_3"  scale="1 1 1" position="40.04961395263672 7.086048126220703 6.019073486328125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BurntTree_3" gltf-model="#BurntTree_3"  scale="1 1 1" position="31.42108154296875 4.766238212585449 -3.5260887145996094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BurntTree_4" gltf-model="#BurntTree_4"  scale="1 1 1" position="40.493194580078125 4.466800689697266 -15.33564567565918" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BurntTree_5" gltf-model="#BurntTree_5"  scale="1 1 1" position="31.547996520996094 2.976954460144043 1.8494071960449219" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BurntTree_5_B_1" gltf-model="#BurntTree_5_B_1"  scale="1 1 1" position="30.836132049560547 5.077878952026367 0.7528076171875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BurntTree_5_B_2" gltf-model="#BurntTree_5_B_2"  scale="1 1 1" position="30.40367889404297 2.6564836502075195 2.8684654235839844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Climbing_Ivy_1" gltf-model="#Climbing_Ivy_1"  scale="1 1 1" position="65.10125732421875 9.65043830871582 -9.196897506713867" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Climbing_Ivy_2" gltf-model="#Climbing_Ivy_2"  scale="1 1 1" position="85.22624206542969 29.744991302490234 -51.41170883178711" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Climbing_Ivy_3" gltf-model="#Climbing_Ivy_3"  scale="1 1 1" position="41.79554748535156 0.7638721466064453 -29.702289581298828" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_1_Lat" gltf-model="#ColdZone_1_Lat"  scale="1 1 1" position="19.56393814086914 0.3756980895996094 -73.43769836425781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_1_Lat_2" gltf-model="#ColdZone_1_Lat_2"  scale="1 1 1" position="19.77996063232422 2.9735774993896484 -73.54328918457031" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_1_Top" gltf-model="#ColdZone_1_Top"  scale="1 1 1" position="27.228296279907227 3.2904205322265625 -71.10516357421875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_Blob" gltf-model="#ColdZone_Blob"  scale="1 1 1" position="29.528057098388672 15.396112442016602 -121.94529724121094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_Log" gltf-model="#ColdZone_Log"  scale="1 1 1" position="29.300344467163086 13.56816291809082 -61.1424446105957" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_Log_Liquen" gltf-model="#ColdZone_Log_Liquen"  scale="1 1 1" position="30.79643440246582 11.112351417541504 -44.67692565917969" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_Log_S_1" gltf-model="#ColdZone_Log_S_1"  scale="1 1 1" position="34.541908264160156 7.643975734710693 -41.84379577636719" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_Log_S_2" gltf-model="#ColdZone_Log_S_2"  scale="1 1 1" position="29.55770492553711 7.653670787811279 -46.165138244628906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_Log_S_3" gltf-model="#ColdZone_Log_S_3"  scale="1 1 1" position="24.17247772216797 8.453157424926758 -51.32069396972656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_Log_S_4" gltf-model="#ColdZone_Log_S_4"  scale="1 1 1" position="53.14444351196289 8.439899444580078 -25.7487850189209" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_Log_S_5" gltf-model="#ColdZone_Log_S_5"  scale="1 1 1" position="16.25813102722168 9.878132820129395 -69.89419555664062" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_Log_S_6" gltf-model="#ColdZone_Log_S_6"  scale="1 1 1" position="12.513471603393555 10.04423999786377 -75.44203186035156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_SmallMount_1" gltf-model="#ColdZone_SmallMount_1"  scale="1 1 1" position="-20.219669342041016 37.09174346923828 -158.2353057861328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#ColdZone_SmallMount_2" gltf-model="#ColdZone_SmallMount_2"  scale="1 1 1" position="-50.91353225708008 18.118358612060547 -140.5751953125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#BlueBlocks_20" gltf-model="#BlueBlocks_20"  scale="1 1 1" position="-104.42024230957031 94.97988891601562 -110.49120330810547" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_1_Lat" gltf-model="#CZPlat_1_Lat"  scale="1 1 1" position="-7.733623504638672 13.465078353881836 -117.40034484863281" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_1_Lat_2" gltf-model="#CZPlat_1_Lat_2"  scale="1 1 1" position="-7.587886810302734 6.007617950439453 -117.96903991699219" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_1_Top" gltf-model="#CZPlat_1_Top"  scale="1 1 1" position="-7.733592987060547 14.420022964477539 -117.40042114257812" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_2_Lat" gltf-model="#CZPlat_2_Lat"  scale="1 1 1" position="-35.149009704589844 18.686113357543945 -137.27333068847656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_2_Lat_2" gltf-model="#CZPlat_2_Lat_2"  scale="1 1 1" position="-34.9864387512207 11.407275199890137 -137.140869140625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_2_Top" gltf-model="#CZPlat_2_Top"  scale="1 1 1" position="-34.28802490234375 19.231971740722656 -137.66241455078125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_3_Lat" gltf-model="#CZPlat_3_Lat"  scale="1 1 1" position="1.2598648071289062 14.560639381408691 -95.06593322753906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_3_Top" gltf-model="#CZPlat_3_Top"  scale="1 1 1" position="2.819356918334961 15.079300880432129 -95.01760864257812" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_4_Lat" gltf-model="#CZPlat_4_Lat"  scale="1 1 1" position="50.20143127441406 6.478661060333252 -98.04875183105469" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_4_Lat_2" gltf-model="#CZPlat_4_Lat_2"  scale="1 1 1" position="43.77533721923828 4.567317962646484 -100.60108947753906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_4_Top" gltf-model="#CZPlat_4_Top"  scale="1 1 1" position="46.606689453125 6.777934551239014 -100.74655151367188" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_5_Lat" gltf-model="#CZPlat_5_Lat"  scale="1 1 1" position="-21.97132110595703 22.72364044189453 -145.75308227539062" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_5_Lat_2" gltf-model="#CZPlat_5_Lat_2"  scale="1 1 1" position="-21.97132110595703 19.15214729309082 -145.75308227539062" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_5_Top" gltf-model="#CZPlat_5_Top"  scale="1 1 1" position="-20.74008560180664 23.174266815185547 -145.0409393310547" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_6_Lat" gltf-model="#CZPlat_6_Lat"  scale="1 1 1" position="-2.0245704650878906 23.779558181762695 -126.94741821289062" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_6_Top" gltf-model="#CZPlat_6_Top"  scale="1 1 1" position="-6.930086135864258 29.432838439941406 -125.12409973144531" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_7_Lat" gltf-model="#CZPlat_7_Lat"  scale="1 1 1" position="72.91207122802734 12.855857849121094 -121.31172180175781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_7_Lat_2" gltf-model="#CZPlat_7_Lat_2"  scale="1 1 1" position="72.91207122802734 9.284354209899902 -121.31172180175781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZPlat_7_Top" gltf-model="#CZPlat_7_Top"  scale="1 1 1" position="72.91207122802734 13.306485176086426 -121.31172180175781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#CZSnowB_1" gltf-model="#CZSnowB_1"  scale="1 1 1" position="46.75684356689453 8.393020629882812 -113.07304382324219" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#FallenLog_1" gltf-model="#FallenLog_1"  scale="1 1 1" position="20.867891311645508 5.361835479736328 -77.39258575439453" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Floor_1" gltf-model="#Floor_1"  scale="1 1 1" position="47.31156921386719 4.801150321960449 -41.80583190917969" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Floor_1.001" gltf-model="#Floor_1.001"  scale="1 1 1" position="52.118011474609375 -69.21292877197266 -49.69004821777344" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Floor_GreenStrips" gltf-model="#Floor_GreenStrips"  scale="1 1 1" position="-145.3092041015625 10.640335083007812 -69.69715881347656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Floor_GreenStrips.001" gltf-model="#Floor_GreenStrips.001"  scale="1 1 1" position="-149.38189697265625 -19.530244827270508 -67.69538879394531" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_AlgTree_1" gltf-model="#Forest_1_AlgTree_1"  scale="1 1 1" position="-20.788143157958984 2.5915584564208984 -18.356712341308594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_AlgTree_2" gltf-model="#Forest_1_AlgTree_2"  scale="1 1 1" position="-29.605358123779297 1.600790023803711 -20.869123458862305" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Euc_1" gltf-model="#Forest_1_Euc_1"  scale="1 1 1" position="-24.817882537841797 13.024755477905273 -10.396842956542969" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Euc_2" gltf-model="#Forest_1_Euc_2"  scale="1 1 1" position="-26.793140411376953 19.451282501220703 -11.095468521118164" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Euc_3" gltf-model="#Forest_1_Euc_3"  scale="1 1 1" position="-29.471302032470703 12.852516174316406 -29.03057098388672" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Euc_4" gltf-model="#Forest_1_Euc_4"  scale="1 1 1" position="-32.33531188964844 12.327181816101074 -32.594573974609375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Euc_5" gltf-model="#Forest_1_Euc_5"  scale="1 1 1" position="-34.88801956176758 11.601346969604492 -13.698812484741211" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Euc_6" gltf-model="#Forest_1_Euc_6"  scale="1 1 1" position="-18.17803192138672 9.247587203979492 -21.52011489868164" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_FallenTree" gltf-model="#Forest_1_FallenTree"  scale="1 1 1" position="-24.297752380371094 4.92269229888916 -23.99941635131836" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Rock_1" gltf-model="#Forest_1_Rock_1"  scale="1 1 1" position="-25.75080108642578 1.0758609771728516 -23.10401153564453" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Tree_1" gltf-model="#Forest_1_Tree_1"  scale="1 1 1" position="-19.59368133544922 2.050464630126953 -24.0787353515625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Tree_2" gltf-model="#Forest_1_Tree_2"  scale="1 1 1" position="-29.431724548339844 4.659714698791504 -24.954368591308594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Tree_3" gltf-model="#Forest_1_Tree_3"  scale="1 1 1" position="-25.15755844116211 4.317831993103027 -18.33921241760254" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Tree_4" gltf-model="#Forest_1_Tree_4"  scale="1 1 1" position="-27.554912567138672 11.577555656433105 -24.694496154785156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Tree_5" gltf-model="#Forest_1_Tree_5"  scale="1 1 1" position="-24.890514373779297 10.22313117980957 -26.079788208007812" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Tree_6" gltf-model="#Forest_1_Tree_6"  scale="1 1 1" position="-24.283893585205078 12.696675300598145 -25.78683090209961" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_Tree_7" gltf-model="#Forest_1_Tree_7"  scale="1 1 1" position="-23.987449645996094 11.146026611328125 -21.136951446533203" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_VertGrass" gltf-model="#Forest_1_VertGrass"  scale="1 1 1" position="-23.658203125 1.1750173568725586 -15.92624282836914" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Forest_1_VertGrass.001" gltf-model="#Forest_1_VertGrass.001"  scale="1 1 1" position="-23.727619171142578 1.2826366424560547 -30.65478515625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Fungi_1" gltf-model="#Fungi_1"  scale="1 1 1" position="-11.843465805053711 37.57137680053711 -122.07872009277344" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Garden_1_Border" gltf-model="#Garden_1_Border"  scale="1 1 1" position="2.681354522705078 0.3516368865966797 2.9554100036621094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Garden_1_Soil" gltf-model="#Garden_1_Soil"  scale="1 1 1" position="2.681354522705078 0.28675365447998047 2.985584259033203" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Garden_2_Border" gltf-model="#Garden_2_Border"  scale="1 1 1" position="-2.7801742553710938 0.3729991912841797 -4.09477424621582" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Garden_2_Soil" gltf-model="#Garden_2_Soil"  scale="1 1 1" position="-2.7466297149658203 0.2731742858886719 -4.019269943237305" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColC_1" gltf-model="#GH_1_ColC_1"  scale="1 1 1" position="-9.784393310546875 2.7207345962524414 -4.104551315307617" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColC_2" gltf-model="#GH_1_ColC_2"  scale="1 1 1" position="-4.0009002685546875 2.7207345962524414 -9.822151184082031" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColC_3" gltf-model="#GH_1_ColC_3"  scale="1 1 1" position="4.132652282714844 2.7207345962524414 -9.823373794555664" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColC_4" gltf-model="#GH_1_ColC_4"  scale="1 1 1" position="9.849778175354004 2.7207345962524414 -3.998636245727539" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColC_5" gltf-model="#GH_1_ColC_5"  scale="1 1 1" position="9.842681884765625 2.7207345962524414 4.033679962158203" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColC_6" gltf-model="#GH_1_ColC_6"  scale="1 1 1" position="4.0914306640625 2.7207345962524414 9.767318725585938" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColC_7" gltf-model="#GH_1_ColC_7"  scale="1 1 1" position="-4.089653015136719 2.7207345962524414 9.794597625732422" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColC_8" gltf-model="#GH_1_ColC_8"  scale="1 1 1" position="-9.805532455444336 2.7207345962524414 4.031684875488281" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColL_1" gltf-model="#GH_1_ColL_1"  scale="1 1 1" position="-11.449752807617188 2.736968994140625 -0.16983413696289062" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColL_2" gltf-model="#GH_1_ColL_2"  scale="1 1 1" position="-7.966655731201172 2.7207345962524414 -8.223087310791016" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColL_3" gltf-model="#GH_1_ColL_3"  scale="1 1 1" position="0.1811676025390625 2.736968994140625 -11.479791641235352" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColL_4" gltf-model="#GH_1_ColL_4"  scale="1 1 1" position="8.224116325378418 2.7207345962524414 -7.972982406616211" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColL_5" gltf-model="#GH_1_ColL_5"  scale="1 1 1" position="11.46200942993164 2.736968994140625 0.10988616943359375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColL_6" gltf-model="#GH_1_ColL_6"  scale="1 1 1" position="8.013712882995605 2.7207345962524414 8.1370849609375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColL_7" gltf-model="#GH_1_ColL_7"  scale="1 1 1" position="-0.1353893280029297 2.736968994140625 11.444171905517578" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColL_8" gltf-model="#GH_1_ColL_8"  scale="1 1 1" position="-8.180601119995117 2.7207345962524414 7.965229034423828" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColR_1" gltf-model="#GH_1_ColR_1"  scale="1 1 1" position="-8.143573760986328 2.736968994140625 -8.03712272644043" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColR_2" gltf-model="#GH_1_ColR_2"  scale="1 1 1" position="-0.07306289672851562 2.7207345962524414 -11.469633102416992" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColR_3" gltf-model="#GH_1_ColR_3"  scale="1 1 1" position="8.040446281433105 2.736968994140625 -8.14969253540039" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColR_4" gltf-model="#GH_1_ColR_4"  scale="1 1 1" position="11.439922332763672 2.7207345962524414 -0.08835601806640625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColR_5" gltf-model="#GH_1_ColR_5"  scale="1 1 1" position="8.1630859375 2.736968994140625 7.960094451904297" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColR_6" gltf-model="#GH_1_ColR_6"  scale="1 1 1" position="0.0943450927734375 2.7207345962524414 11.394119262695312" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColR_7" gltf-model="#GH_1_ColR_7"  scale="1 1 1" position="-8.03363037109375 2.736968994140625 8.1361083984375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_ColR_8" gltf-model="#GH_1_ColR_8"  scale="1 1 1" position="-11.398883819580078 2.7207345962524414 0.0744781494140625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCL_1" gltf-model="#GH_1_EmbCL_1"  scale="1 1 1" position="-9.985960006713867 5.211304664611816 -3.6331615447998047" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCL_2" gltf-model="#GH_1_EmbCL_2"  scale="1 1 1" position="-4.48640251159668 5.195068359375 -9.646156311035156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCL_3" gltf-model="#GH_1_EmbCL_3"  scale="1 1 1" position="3.640164375305176 5.211304664611816 -10.005800247192383" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCL_4" gltf-model="#GH_1_EmbCL_4"  scale="1 1 1" position="9.636921882629395 5.195068359375 -4.488546371459961" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCL_5" gltf-model="#GH_1_EmbCL_5"  scale="1 1 1" position="10.014369010925293 5.211304664611816 3.5841102600097656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCL_6" gltf-model="#GH_1_EmbCL_6"  scale="1 1 1" position="4.542973518371582 5.195068359375 9.576927185058594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCL_7" gltf-model="#GH_1_EmbCL_7"  scale="1 1 1" position="-3.636016845703125 5.211304664611816 9.973167419433594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCL_8" gltf-model="#GH_1_EmbCL_8"  scale="1 1 1" position="-9.612604141235352 5.195068359375 4.484340667724609" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCR_1" gltf-model="#GH_1_EmbCR_1"  scale="1 1 1" position="-9.582950592041016 5.211304664611816 -4.582368850708008" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCR_2" gltf-model="#GH_1_EmbCR_2"  scale="1 1 1" position="-3.5312633514404297 5.195068359375 -10.034900665283203" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCR_3" gltf-model="#GH_1_EmbCR_3"  scale="1 1 1" position="4.588178634643555 5.211304664611816 -9.599998474121094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCR_4" gltf-model="#GH_1_EmbCR_4"  scale="1 1 1" position="10.022847175598145 5.195068359375 -3.532266616821289" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCR_5" gltf-model="#GH_1_EmbCR_5"  scale="1 1 1" position="9.626875877380371 5.211304664611816 4.496772766113281" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCR_6" gltf-model="#GH_1_EmbCR_6"  scale="1 1 1" position="3.6188507080078125 5.195068359375 9.95303726196289" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCR_7" gltf-model="#GH_1_EmbCR_7"  scale="1 1 1" position="-4.547529220581055 5.211304664611816 9.58298110961914" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbCR_8" gltf-model="#GH_1_EmbCR_8"  scale="1 1 1" position="-9.986074447631836 5.195068359375 3.558910369873047" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbL_1" gltf-model="#GH_1_EmbL_1"  scale="1 1 1" position="-11.270263671875 5.211304664611816 -0.6082611083984375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbL_2" gltf-model="#GH_1_EmbL_2"  scale="1 1 1" position="-7.530210494995117 5.195068359375 -8.407329559326172" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbL_3" gltf-model="#GH_1_EmbL_3"  scale="1 1 1" position="0.6190605163574219 5.211304664611816 -11.299007415771484" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbL_4" gltf-model="#GH_1_EmbL_4"  scale="1 1 1" position="8.407076835632324 5.195068359375 -7.535993576049805" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbL_5" gltf-model="#GH_1_EmbL_5"  scale="1 1 1" position="11.28773307800293 5.211304664611816 0.5849571228027344" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbL_6" gltf-model="#GH_1_EmbL_6"  scale="1 1 1" position="7.555111885070801 5.195068359375 8.350982666015625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbL_7" gltf-model="#GH_1_EmbL_7"  scale="1 1 1" position="-0.6224651336669922 5.211304664611816 11.263137817382812" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbL_8" gltf-model="#GH_1_EmbL_8"  scale="1 1 1" position="-8.3956298828125 5.195068359375 7.499874114990234" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbLat_1" gltf-model="#GH_1_EmbLat_1"  scale="1 1 1" position="0.016454661265015602 5.906612396240234 -0.000881195068359375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbLat_2" gltf-model="#GH_1_EmbLat_2"  scale="1 1 1" position="-0.0015583038330078125 4.70225715637207 -0.01958465576171875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbR_1" gltf-model="#GH_1_EmbR_1"  scale="1 1 1" position="-8.325103759765625 5.211304664611816 -7.544975280761719" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbR_2" gltf-model="#GH_1_EmbR_2"  scale="1 1 1" position="-0.550140380859375 5.195068359375 -11.248208999633789" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbR_3" gltf-model="#GH_1_EmbR_3"  scale="1 1 1" position="7.547067642211914 5.211304664611816 -8.33342170715332" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbR_4" gltf-model="#GH_1_EmbR_4"  scale="1 1 1" position="11.227370262145996 5.195068359375 -0.5475845336914062" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbR_5" gltf-model="#GH_1_EmbR_5"  scale="1 1 1" position="8.347338676452637 5.211304664611816 7.510456085205078" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbR_6" gltf-model="#GH_1_EmbR_6"  scale="1 1 1" position="0.5578079223632812 5.195068359375 11.237003326416016" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbR_7" gltf-model="#GH_1_EmbR_7"  scale="1 1 1" position="-7.540691375732422 5.211304664611816 8.301746368408203" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_EmbR_8" gltf-model="#GH_1_EmbR_8"  scale="1 1 1" position="-11.206483840942383 5.195068359375 0.5348548889160156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Floor" gltf-model="#GH_1_Floor"  scale="1 1 1" position="0.016458511352539062 0.2460498809814453 -0.000881195068359375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_FloorLat" gltf-model="#GH_1_FloorLat"  scale="1 1 1" position="0.016454704105854034 0.21613502502441406 -0.000881195068359375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_GlassCeiling" gltf-model="#GH_1_GlassCeiling"  scale="1 1 1" position="0.01645848900079727 7.08367395401001 -0.000881195068359375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Ivy_1" gltf-model="#GH_1_Ivy_1"  scale="1 1 1" position="-4.974298477172852 5.772772789001465 -4.061103820800781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Ivy_10" gltf-model="#GH_1_Ivy_10"  scale="1 1 1" position="0.23785972595214844 5.745939254760742 -0.08706283569335938" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Ivy_11" gltf-model="#GH_1_Ivy_11"  scale="1 1 1" position="-3.9766788482666016 6.144496917724609 5.0066986083984375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Ivy_2" gltf-model="#GH_1_Ivy_2"  scale="1 1 1" position="5.444896697998047 6.481919765472412 2.8438682556152344" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Ivy_3" gltf-model="#GH_1_Ivy_3"  scale="1 1 1" position="1.0395584106445312 7.114238262176514 2.066333770751953" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Ivy_4" gltf-model="#GH_1_Ivy_4"  scale="1 1 1" position="-1.936737060546875 6.8495330810546875 -1.2899742126464844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Ivy_5" gltf-model="#GH_1_Ivy_5"  scale="1 1 1" position="9.462610244750977 4.407990455627441 -4.6129913330078125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Ivy_6" gltf-model="#GH_1_Ivy_6"  scale="1 1 1" position="1.6537837982177734 4.320391654968262 10.681663513183594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Ivy_7" gltf-model="#GH_1_Ivy_7"  scale="1 1 1" position="-8.53150749206543 4.489892959594727 6.895820617675781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Ivy_8" gltf-model="#GH_1_Ivy_8"  scale="1 1 1" position="-3.3799209594726562 6.317698955535889 -5.265375137329102" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Ivy_9" gltf-model="#GH_1_Ivy_9"  scale="1 1 1" position="0.23785972595214844 5.510415077209473 -0.08706283569335938" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Lily_1" gltf-model="#GH_1_Lily_1"  scale="1 1 1" position="-3.1839656829833984 0.3498516082763672 0.5666961669921875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Lily_2" gltf-model="#GH_1_Lily_2"  scale="1 1 1" position="4.836772918701172 0.3498516082763672 -3.9880638122558594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Lily_3" gltf-model="#GH_1_Lily_3"  scale="1 1 1" position="-6.044685363769531 0.3498516082763672 -4.855428695678711" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Lily_4" gltf-model="#GH_1_Lily_4"  scale="1 1 1" position="-0.8749637603759766 0.3498516082763672 -6.235857009887695" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Lily_5" gltf-model="#GH_1_Lily_5"  scale="1 1 1" position="5.357779502868652 0.3498516082763672 6.360424041748047" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Lily_6" gltf-model="#GH_1_Lily_6"  scale="1 1 1" position="3.167692184448242 0.3498516082763672 -2.5853443145751953" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Lily_7" gltf-model="#GH_1_Lily_7"  scale="1 1 1" position="-4.972373962402344 0.3498516082763672 -0.6307945251464844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofEmb" gltf-model="#GH_1_RoofEmb"  scale="1 1 1" position="0.016454679891467094 8.023469924926758 -0.000881195068359375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofT_1" gltf-model="#GH_1_RoofT_1"  scale="1 1 1" position="-9.156089782714844 7.082321643829346 -0.013851165771484375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofT_2" gltf-model="#GH_1_RoofT_2"  scale="1 1 1" position="9.109560012817383 7.117462158203125 -0.012790679931640625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofT_3" gltf-model="#GH_1_RoofT_3"  scale="1 1 1" position="-6.467136383056641 7.082321643829346 -6.4851837158203125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofT_4" gltf-model="#GH_1_RoofT_4"  scale="1 1 1" position="6.420611381530762 7.117462158203125 6.458534240722656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofT_5" gltf-model="#GH_1_RoofT_5"  scale="1 1 1" position="-6.468658447265625 7.087900161743164 6.4572601318359375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofT_6" gltf-model="#GH_1_RoofT_6"  scale="1 1 1" position="6.45688533782959 7.100320816040039 -6.448858261108398" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofT_7" gltf-model="#GH_1_RoofT_7"  scale="1 1 1" position="-0.035552978515625 7.099249839782715 9.119487762451172" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofT_8" gltf-model="#GH_1_RoofT_8"  scale="1 1 1" position="-0.01097869873046875 7.100164413452148 -9.146135330200195" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofTI_1" gltf-model="#GH_1_RoofTI_1"  scale="1 1 1" position="0.0013790130615234375 8.051271438598633 4.0508575439453125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofTI_2" gltf-model="#GH_1_RoofTI_2"  scale="1 1 1" position="0.01108551025390625 8.051271438598633 -4.047361373901367" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofTI_3" gltf-model="#GH_1_RoofTI_3"  scale="1 1 1" position="4.013526916503906 8.051271438598633 -0.013988494873046875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_RoofTI_4" gltf-model="#GH_1_RoofTI_4"  scale="1 1 1" position="-4.084630966186523 8.051271438598633 0.017486572265625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Stairs_1" gltf-model="#GH_1_Stairs_1"  scale="1 1 1" position="-3.9169368743896484 -0.03608417510986328 -9.845762252807617" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Stairs_2" gltf-model="#GH_1_Stairs_2"  scale="1 1 1" position="4.16445255279541 -0.03608417510986328 9.728782653808594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Stairs_3" gltf-model="#GH_1_Stairs_3"  scale="1 1 1" position="9.850935935974121 -0.03608417510986328 -4.131660461425781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Stairs_4" gltf-model="#GH_1_Stairs_4"  scale="1 1 1" position="-9.799144744873047 -0.03608417510986328 4.011157989501953" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#GH_1_Top" gltf-model="#GH_1_Top"  scale="1 1 1" position="0.016454726457595825 7.939022541046143 -0.000881195068359375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Base" gltf-model="#H1_BluePlant_Base"  scale="1 1 1" position="-146.41563415527344 10.606331825256348 -67.90000915527344" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Base2" gltf-model="#H1_BluePlant_Base2"  scale="1 1 1" position="-146.41574096679688 10.677803993225098 -67.90023040771484" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_1" gltf-model="#H1_BluePlant_Branch_1"  scale="1 1 1" position="-146.83009338378906 15.431467056274414 -69.77911376953125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_10" gltf-model="#H1_BluePlant_Branch_10"  scale="1 1 1" position="-145.78793334960938 14.80972671508789 -69.72535705566406" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_11" gltf-model="#H1_BluePlant_Branch_11"  scale="1 1 1" position="-144.54208374023438 14.471364974975586 -68.66422271728516" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_12" gltf-model="#H1_BluePlant_Branch_12"  scale="1 1 1" position="-145.41806030273438 14.238835334777832 -66.01333618164062" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_13" gltf-model="#H1_BluePlant_Branch_13"  scale="1 1 1" position="-147.2249755859375 13.753055572509766 -66.8549575805664" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_14" gltf-model="#H1_BluePlant_Branch_14"  scale="1 1 1" position="-144.70700073242188 12.495002746582031 -68.0954360961914" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_15" gltf-model="#H1_BluePlant_Branch_15"  scale="1 1 1" position="-146.75375366210938 12.662012100219727 -66.13469696044922" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_16" gltf-model="#H1_BluePlant_Branch_16"  scale="1 1 1" position="-147.7145233154297 12.636186599731445 -68.13021087646484" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_17" gltf-model="#H1_BluePlant_Branch_17"  scale="1 1 1" position="-147.05270385742188 12.753037452697754 -69.08150482177734" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_18" gltf-model="#H1_BluePlant_Branch_18"  scale="1 1 1" position="-146.12986755371094 12.757148742675781 -68.97779846191406" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_2" gltf-model="#H1_BluePlant_Branch_2"  scale="1 1 1" position="-146.11883544921875 12.790303230285645 -67.830322265625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_3" gltf-model="#H1_BluePlant_Branch_3"  scale="1 1 1" position="-144.811279296875 15.00129222869873 -69.03681182861328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_4" gltf-model="#H1_BluePlant_Branch_4"  scale="1 1 1" position="-144.62005615234375 14.861551284790039 -66.89643096923828" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_5" gltf-model="#H1_BluePlant_Branch_5"  scale="1 1 1" position="-147.85316467285156 15.14806842803955 -67.00975036621094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_6" gltf-model="#H1_BluePlant_Branch_6"  scale="1 1 1" position="-147.68711853027344 14.955340385437012 -68.76435089111328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_7" gltf-model="#H1_BluePlant_Branch_7"  scale="1 1 1" position="-144.09925842285156 15.528079986572266 -68.14210510253906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_8" gltf-model="#H1_BluePlant_Branch_8"  scale="1 1 1" position="-145.98532104492188 15.188027381896973 -65.68231201171875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Branch_9" gltf-model="#H1_BluePlant_Branch_9"  scale="1 1 1" position="-147.27401733398438 15.085090637207031 -66.13409423828125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Corona1_1" gltf-model="#H1_BluePlant_Corona1_1"  scale="1 1 1" position="-146.1762237548828 16.627731323242188 -67.70376586914062" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Corona1_2" gltf-model="#H1_BluePlant_Corona1_2"  scale="1 1 1" position="-146.1426544189453 17.103260040283203 -67.71104431152344" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Corona2" gltf-model="#H1_BluePlant_Corona2"  scale="1 1 1" position="-146.22303771972656 19.96551513671875 -67.71910095214844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Corona2_Center" gltf-model="#H1_BluePlant_Corona2_Center"  scale="1 1 1" position="-146.1776123046875 19.91096305847168 -67.7082748413086" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Corona2_Center2" gltf-model="#H1_BluePlant_Corona2_Center2"  scale="1 1 1" position="-146.14060974121094 22.235124588012695 -67.69990539550781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Corona2_Center3" gltf-model="#H1_BluePlant_Corona2_Center3"  scale="1 1 1" position="-146.1526336669922 23.015851974487305 -67.70458221435547" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_BluePlant_Trunk" gltf-model="#H1_BluePlant_Trunk"  scale="1 1 1" position="-146.23374938964844 12.091341018676758 -67.77061462402344" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_Col1" gltf-model="#H1_F1_Col1"  scale="1 1 1" position="-110.67511749267578 15.303278923034668 -68.55757904052734" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_Col2" gltf-model="#H1_F1_Col2"  scale="1 1 1" position="-124.60636901855469 15.268072128295898 -73.84561157226562" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_Col3" gltf-model="#H1_F1_Col3"  scale="1 1 1" position="-174.5524444580078 15.141852378845215 -92.8042221069336" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_Col4" gltf-model="#H1_F1_Col4"  scale="1 1 1" position="-160.62115478515625 15.177057266235352 -87.51617431640625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_Col5" gltf-model="#H1_F1_Col5"  scale="1 1 1" position="-170.08135986328125 15.244362831115723 -62.593868255615234" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_Col6" gltf-model="#H1_F1_Col6"  scale="1 1 1" position="-184.01268005371094 15.209157943725586 -67.88192749023438" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_Col7" gltf-model="#H1_F1_Col7"  scale="1 1 1" position="-134.0665740966797 15.33537769317627 -48.92333221435547" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_Col8" gltf-model="#H1_F1_Col8"  scale="1 1 1" position="-120.13532257080078 15.370582580566406 -43.635292053222656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_ColSup1" gltf-model="#H1_F1_ColSup1"  scale="1 1 1" position="-111.01219940185547 19.716270446777344 -67.72356414794922" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_ColSup2" gltf-model="#H1_F1_ColSup2"  scale="1 1 1" position="-169.78646850585938 19.65316390991211 -63.32783889770508" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_CrystalSup" gltf-model="#H1_F1_CrystalSup"  scale="1 1 1" position="-147.50709533691406 23.55330467224121 -68.3273696899414" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_RoofHole" gltf-model="#H1_F1_RoofHole"  scale="1 1 1" position="-147.513916015625 28.741806030273438 -68.3439712524414" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_W1" gltf-model="#H1_F1_W1"  scale="1 1 1" position="-126.45567321777344 15.467348098754883 -39.926055908203125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_W2" gltf-model="#H1_F1_W2"  scale="1 1 1" position="-109.85611724853516 15.489547729492188 -39.79908752441406" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_W3" gltf-model="#H1_F1_W3"  scale="1 1 1" position="-100.39006805419922 15.422200202941895 -64.73682403564453" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_W4" gltf-model="#H1_F1_W4"  scale="1 1 1" position="-184.94329833984375 15.20852279663086 -96.83168029785156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_W5" gltf-model="#H1_F1_W5"  scale="1 1 1" position="-194.41929626464844 15.27584457397461 -71.89768981933594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_W6" gltf-model="#H1_F1_W6"  scale="1 1 1" position="-112.89424896240234 15.370865821838379 -75.65269470214844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_W7" gltf-model="#H1_F1_W7"  scale="1 1 1" position="-181.94944763183594 15.327184677124023 -60.96640396118164" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_W8" gltf-model="#H1_F1_W8"  scale="1 1 1" position="-168.36862182617188 15.230674743652344 -96.70975494384766" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_WoodenBlock_1" gltf-model="#H1_F1_WoodenBlock_1"  scale="1 1 1" position="-127.02955627441406 19.188278198242188 -46.27557373046875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_WoodenBlock_2" gltf-model="#H1_F1_WoodenBlock_2"  scale="1 1 1" position="-152.00228881835938 19.12516975402832 -55.7547607421875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_WoodenBlock_3" gltf-model="#H1_F1_WoodenBlock_3"  scale="1 1 1" position="-142.53648376464844 19.057825088500977 -80.69178009033203" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_WoodenBlock_4" gltf-model="#H1_F1_WoodenBlock_4"  scale="1 1 1" position="-117.56375885009766 19.120935440063477 -71.21261596679688" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F1_WoodenBlock_5" gltf-model="#H1_F1_WoodenBlock_5"  scale="1 1 1" position="-167.8203887939453 18.993928909301758 -90.28907775878906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col1" gltf-model="#H1_F2_Col1"  scale="1 1 1" position="-102.9145278930664 24.926849365234375 -59.95168685913086" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col10" gltf-model="#H1_F2_Col10"  scale="1 1 1" position="-181.70201110839844 24.817834854125977 -61.6948127746582" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col11" gltf-model="#H1_F2_Col11"  scale="1 1 1" position="-167.0103759765625 24.854961395263672 -56.11813735961914" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col12" gltf-model="#H1_F2_Col12"  scale="1 1 1" position="-154.07057189941406 24.762903213500977 -90.20729064941406" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col13" gltf-model="#H1_F2_Col13"  scale="1 1 1" position="-113.17798614501953 24.866243362426758 -74.68523406982422" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col14" gltf-model="#H1_F2_Col14"  scale="1 1 1" position="-126.11784362792969 24.95830535888672 -40.59608459472656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col15" gltf-model="#H1_F2_Col15"  scale="1 1 1" position="-140.80950927734375 24.92117691040039 -46.172760009765625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col16" gltf-model="#H1_F2_Col16"  scale="1 1 1" position="-127.86964416503906 24.829113006591797 -80.26190948486328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col2" gltf-model="#H1_F2_Col2"  scale="1 1 1" position="-99.31876373291016 24.901268005371094 -69.42449951171875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col3" gltf-model="#H1_F2_Col3"  scale="1 1 1" position="-108.66283416748047 24.96774673461914 -44.80821990966797" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col4" gltf-model="#H1_F2_Col4"  scale="1 1 1" position="-112.25858306884766 24.993328094482422 -35.33539581298828" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col5" gltf-model="#H1_F2_Col5"  scale="1 1 1" position="-195.8975830078125 24.781959533691406 -67.08317565917969" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col6" gltf-model="#H1_F2_Col6"  scale="1 1 1" position="-192.3018035888672 24.756380081176758 -76.55603790283203" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col7" gltf-model="#H1_F2_Col7"  scale="1 1 1" position="-182.95777893066406 24.689899444580078 -101.17233276367188" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col8" gltf-model="#H1_F2_Col8"  scale="1 1 1" position="-186.5535430908203 24.715482711791992 -91.69950103759766" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Col9" gltf-model="#H1_F2_Col9"  scale="1 1 1" position="-168.76220703125 24.72577667236328 -95.78396606445312" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Crystal" gltf-model="#H1_F2_Crystal"  scale="1 1 1" position="-147.50619506835938 22.860807418823242 -68.32514953613281" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_F2_Floor" gltf-model="#H1_F2_Floor"  scale="1 1 1" position="-147.50379943847656 21.035511016845703 -68.31932067871094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_Floor" gltf-model="#H1_Floor"  scale="1 1 1" position="-147.489501953125 10.161130905151367 -68.28453063964844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_Floor2" gltf-model="#H1_Floor2"  scale="1 1 1" position="-147.489990234375 10.52187728881836 -68.28569030761719" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_Floor2_Lat" gltf-model="#H1_Floor2_Lat"  scale="1 1 1" position="-147.49000549316406 10.521876335144043 -68.28569030761719" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_Moss_1" gltf-model="#H1_Moss_1"  scale="1 1 1" position="-126.74535369873047 18.91917610168457 -74.19506072998047" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_Moss_2" gltf-model="#H1_Moss_2"  scale="1 1 1" position="-134.94667053222656 20.404008865356445 -53.26235580444336" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_Moss_3" gltf-model="#H1_Moss_3"  scale="1 1 1" position="-171.1375732421875 19.216588973999023 -63.56967544555664" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_Moss_4" gltf-model="#H1_Moss_4"  scale="1 1 1" position="-123.14118194580078 19.232635498046875 -73.10450744628906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_Roof" gltf-model="#H1_Roof"  scale="1 1 1" position="-147.51516723632812 29.708118438720703 -68.3470687866211" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Blob1" gltf-model="#H1_RPl_Blob1"  scale="1 1 1" position="-131.2443084716797 19.470726013183594 -68.13788604736328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Blob2" gltf-model="#H1_RPl_Blob2"  scale="1 1 1" position="-131.23826599121094 17.976051330566406 -68.19088745117188" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Blob3" gltf-model="#H1_RPl_Blob3"  scale="1 1 1" position="-131.09463500976562 16.739734649658203 -67.8326187133789" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Blob4" gltf-model="#H1_RPl_Blob4"  scale="1 1 1" position="-130.96641540527344 15.751409530639648 -68.0738525390625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Blob5" gltf-model="#H1_RPl_Blob5"  scale="1 1 1" position="-131.00433349609375 15.110489845275879 -68.28807830810547" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Blob6" gltf-model="#H1_RPl_Blob6"  scale="1 1 1" position="-131.2616729736328 13.393327713012695 -67.91735076904297" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Cherry1" gltf-model="#H1_RPl_Cherry1"  scale="1 1 1" position="-130.5883331298828 17.314720153808594 -68.15382385253906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Cherry2" gltf-model="#H1_RPl_Cherry2"  scale="1 1 1" position="-131.41551208496094 14.559564590454102 -68.32733154296875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Cherry3" gltf-model="#H1_RPl_Cherry3"  scale="1 1 1" position="-130.4235076904297 14.780221939086914 -68.50843048095703" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Cherry4" gltf-model="#H1_RPl_Cherry4"  scale="1 1 1" position="-131.34388732910156 15.0346097946167 -67.90695190429688" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Cherry5" gltf-model="#H1_RPl_Cherry5"  scale="1 1 1" position="-131.1220245361328 16.206966400146484 -68.38079833984375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Cherry6" gltf-model="#H1_RPl_Cherry6"  scale="1 1 1" position="-131.3854217529297 16.30841636657715 -67.69606018066406" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Cherry7" gltf-model="#H1_RPl_Cherry7"  scale="1 1 1" position="-131.568603515625 15.52338981628418 -67.89900207519531" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Cherry8" gltf-model="#H1_RPl_Cherry8"  scale="1 1 1" position="-130.64041137695312 13.857466697692871 -68.33566284179688" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Ext" gltf-model="#H1_RPl_Ext"  scale="1 1 1" position="-131.05809020996094 16.33326530456543 -67.9940414428711" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_RPl_Trunk" gltf-model="#H1_RPl_Trunk"  scale="1 1 1" position="-131.14401245117188 15.674692153930664 -68.01224517822266" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_YPl_Blob1" gltf-model="#H1_YPl_Blob1"  scale="1 1 1" position="-160.57872009277344 19.015727996826172 -66.57197570800781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_YPl_Blob2" gltf-model="#H1_YPl_Blob2"  scale="1 1 1" position="-160.1346435546875 13.305807113647461 -66.29908752441406" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_YPl_Blob3" gltf-model="#H1_YPl_Blob3"  scale="1 1 1" position="-160.22116088867188 14.462502479553223 -66.17284393310547" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_YPl_Blob4" gltf-model="#H1_YPl_Blob4"  scale="1 1 1" position="-160.2349395751953 15.637319564819336 -66.75679779052734" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_YPl_Blob5" gltf-model="#H1_YPl_Blob5"  scale="1 1 1" position="-160.03038024902344 16.172653198242188 -66.96324920654297" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_YPl_Blob6" gltf-model="#H1_YPl_Blob6"  scale="1 1 1" position="-160.36024475097656 17.548215866088867 -66.7027587890625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_YPl_Ext" gltf-model="#H1_YPl_Ext"  scale="1 1 1" position="-160.23609924316406 15.959010124206543 -66.48973083496094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#H1_YPl_Trunk" gltf-model="#H1_YPl_Trunk"  scale="1 1 1" position="-160.2255096435547 15.36962890625 -66.51156616210938" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#HighTower" gltf-model="#HighTower"  scale="1 1 1" position="46.85392761230469 83.30052947998047 -114.8887939453125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#HMountains_1" gltf-model="#HMountains_1"  scale="1 1 1" position="125.93045043945312 43.22055435180664 -77.72801971435547" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#HMountains_2" gltf-model="#HMountains_2"  scale="1 1 1" position="127.97406768798828 30.674936294555664 0.20657333731651306" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Icicle_Lat" gltf-model="#Icicle_Lat"  scale="1 1 1" position="51.271820068359375 15.586175918579102 -108.44456481933594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Icicle_Top" gltf-model="#Icicle_Top"  scale="1 1 1" position="52.48041915893555 24.583120346069336 -109.79638671875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Block_1" gltf-model="#Island_1_Block_1"  scale="1 1 1" position="-14.270210266113281 25.0357666015625 -40.82455825805664" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Block_2" gltf-model="#Island_1_Block_2"  scale="1 1 1" position="-11.751087188720703 28.01449966430664 -38.830867767333984" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Block_3" gltf-model="#Island_1_Block_3"  scale="1 1 1" position="-13.148189544677734 29.992904663085938 -40.25818634033203" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Block_4" gltf-model="#Island_1_Block_4"  scale="1 1 1" position="-14.113182067871094 31.854961395263672 -40.157100677490234" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_FlBlock_1" gltf-model="#Island_1_FlBlock_1"  scale="1 1 1" position="-20.635910034179688 35.10847854614258 -43.5987663269043" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Floor_1" gltf-model="#Island_1_Floor_1"  scale="1 1 1" position="-14.017539978027344 17.731243133544922 -33.6202278137207" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Hanging_1" gltf-model="#Island_1_Hanging_1"  scale="1 1 1" position="-7.590009689331055 18.807313919067383 -23.18167495727539" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Hanging_2" gltf-model="#Island_1_Hanging_2"  scale="1 1 1" position="-13.604351043701172 18.811315536499023 -23.233074188232422" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Hanging_3" gltf-model="#Island_1_Hanging_3"  scale="1 1 1" position="-20.522441864013672 18.017799377441406 -23.359512329101562" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Rock_1" gltf-model="#Island_1_Rock_1"  scale="1 1 1" position="-11.00848388671875 23.303333282470703 -38.18572998046875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Rock_2" gltf-model="#Island_1_Rock_2"  scale="1 1 1" position="-15.37417984008789 29.0194091796875 -42.08241271972656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Roots_Rock" gltf-model="#Island_1_Roots_Rock"  scale="1 1 1" position="-17.114933013916016 23.55878448486328 -40.15846633911133" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_SlimTree_1" gltf-model="#Island_1_SlimTree_1"  scale="1 1 1" position="-10.410406112670898 29.558467864990234 -37.56728744506836" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_SlimTree_2" gltf-model="#Island_1_SlimTree_2"  scale="1 1 1" position="-7.733711242675781 30.309219360351562 -35.08467102050781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_TFlower_1" gltf-model="#Island_1_TFlower_1"  scale="1 1 1" position="-11.377687454223633 26.18674087524414 -34.16246032714844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_TFlower_2" gltf-model="#Island_1_TFlower_2"  scale="1 1 1" position="-14.595741271972656 30.83797836303711 -35.84162139892578" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_TFlower_3" gltf-model="#Island_1_TFlower_3"  scale="1 1 1" position="-12.269081115722656 32.66920471191406 -36.67224884033203" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_TFlower_4" gltf-model="#Island_1_TFlower_4"  scale="1 1 1" position="-11.450248718261719 28.835647583007812 -37.53480529785156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_TFlower_5" gltf-model="#Island_1_TFlower_5"  scale="1 1 1" position="-14.997875213623047 25.21880340576172 -34.15696716308594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_TFlower_6" gltf-model="#Island_1_TFlower_6"  scale="1 1 1" position="-9.2767333984375 28.618377685546875 -37.225730895996094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Tree_1" gltf-model="#Island_1_Tree_1"  scale="1 1 1" position="-15.52676773071289 24.059276580810547 -36.77819061279297" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Island_1_Tree_2" gltf-model="#Island_1_Tree_2"  scale="1 1 1" position="-13.418838500976562 27.36196517944336 -35.80564880371094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#liquen_1" gltf-model="#liquen_1"  scale="1 1 1" position="7.1448974609375 8.483983993530273 23.6630859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#liquen_2" gltf-model="#liquen_2"  scale="1 1 1" position="-16.636554718017578 8.483983993530273 23.6630859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#liquen_3" gltf-model="#liquen_3"  scale="1 1 1" position="-13.994171142578125 8.483983993530273 23.6630859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MountPass_1" gltf-model="#MountPass_1"  scale="1 1 1" position="58.918067932128906 24.91820526123047 -63.16327667236328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MountPass_1_Ivy_1" gltf-model="#MountPass_1_Ivy_1"  scale="1 1 1" position="55.292266845703125 25.857044219970703 -61.328880310058594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MountPass_1_Ivy_2" gltf-model="#MountPass_1_Ivy_2"  scale="1 1 1" position="69.85228729248047 21.9283504486084 -49.798614501953125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MountPass_1_Ivy_3" gltf-model="#MountPass_1_Ivy_3"  scale="1 1 1" position="44.97775650024414 17.98069953918457 -71.61141967773438" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_1" gltf-model="#MTree_1"  scale="1 1 1" position="57.22187042236328 10.169258117675781 -2.132242202758789" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_10" gltf-model="#MTree_10"  scale="1 1 1" position="47.904579162597656 9.253617286682129 -69.75091552734375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_1_B_1" gltf-model="#MTree_1_B_1"  scale="1 1 1" position="57.75413513183594 24.571300506591797 0.3915085792541504" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_1_B_2" gltf-model="#MTree_1_B_2"  scale="1 1 1" position="55.74492263793945 15.693483352661133 -3.8623695373535156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_1_B_3" gltf-model="#MTree_1_B_3"  scale="1 1 1" position="54.796913146972656 24.693668365478516 -1.8122425079345703" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_1_Bch_1" gltf-model="#MTree_1_Bch_1"  scale="1 1 1" position="57.263187408447266 26.738048553466797 -1.6867237091064453" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_1_Bch_2" gltf-model="#MTree_1_Bch_2"  scale="1 1 1" position="57.23920440673828 15.217586517333984 -2.2787132263183594" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_2" gltf-model="#MTree_2"  scale="1 1 1" position="68.03001403808594 14.574257850646973 -17.56180763244629" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_2_Bch_1" gltf-model="#MTree_2_Bch_1"  scale="1 1 1" position="68.09713745117188 33.71184539794922 -17.375518798828125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_2_Bch_2" gltf-model="#MTree_2_Bch_2"  scale="1 1 1" position="68.07083129882812 29.306468963623047 -17.674440383911133" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_2_Bch_3" gltf-model="#MTree_2_Bch_3"  scale="1 1 1" position="68.05413055419922 19.24494743347168 -17.576242446899414" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_3" gltf-model="#MTree_3"  scale="1 1 1" position="75.69664001464844 24.549081802368164 4.863990783691406" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_3_Bch_1" gltf-model="#MTree_3_Bch_1"  scale="1 1 1" position="75.99649047851562 40.289085388183594 4.486667633056641" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_3_Liquen" gltf-model="#MTree_3_Liquen"  scale="1 1 1" position="72.6207275390625 36.28749465942383 9.233688354492188" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_4" gltf-model="#MTree_4"  scale="1 1 1" position="90.31613159179688 33.439048767089844 1.4124565124511719" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_4_Bch_1" gltf-model="#MTree_4_Bch_1"  scale="1 1 1" position="90.9129638671875 36.04804992675781 1.4497299194335938" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_4_Bch_2" gltf-model="#MTree_4_Bch_2"  scale="1 1 1" position="90.61433410644531 44.937599182128906 1.1768226623535156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_5" gltf-model="#MTree_5"  scale="1 1 1" position="94.0623779296875 28.371185302734375 15.032928466796875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_5_Bch_1" gltf-model="#MTree_5_Bch_1"  scale="1 1 1" position="94.7430419921875 41.44230270385742 14.866985321044922" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_6" gltf-model="#MTree_6"  scale="1 1 1" position="76.47207641601562 24.022323608398438 -25.871681213378906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_6_Bch_1" gltf-model="#MTree_6_Bch_1"  scale="1 1 1" position="76.08187103271484 38.316768646240234 -26.24970245361328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_6_LIquen" gltf-model="#MTree_6_LIquen"  scale="1 1 1" position="73.71812438964844 35.593143463134766 -26.28481101989746" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_7" gltf-model="#MTree_7"  scale="1 1 1" position="90.83552551269531 41.836891174316406 -22.820903778076172" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_7_B_1" gltf-model="#MTree_7_B_1"  scale="1 1 1" position="88.25956726074219 52.66313171386719 -25.254846572875977" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_7_Bch_1" gltf-model="#MTree_7_Bch_1"  scale="1 1 1" position="91.18443298339844 59.13412094116211 -22.799678802490234" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_7_Bch_2" gltf-model="#MTree_7_Bch_2"  scale="1 1 1" position="91.18443298339844 45.81909942626953 -22.799678802490234" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_8" gltf-model="#MTree_8"  scale="1 1 1" position="75.289306640625 31.481372833251953 -65.207763671875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_8_Bch_1" gltf-model="#MTree_8_Bch_1"  scale="1 1 1" position="74.98149108886719 45.82112121582031 -64.97423553466797" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_8_Bch_2" gltf-model="#MTree_8_Bch_2"  scale="1 1 1" position="74.95243835449219 35.707984924316406 -64.9740219116211" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_9" gltf-model="#MTree_9"  scale="1 1 1" position="55.37731170654297 7.728723049163818 20.187950134277344" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_9_Bch_1" gltf-model="#MTree_9_Bch_1"  scale="1 1 1" position="55.0949592590332 12.809202194213867 20.02835464477539" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#MTree_9_Liquen" gltf-model="#MTree_9_Liquen"  scale="1 1 1" position="55.27710723876953 19.779632568359375 21.531970977783203" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PineBase_1" gltf-model="#PineBase_1"  scale="1 1 1" position="-11.972890853881836 9.802689552307129 -90.99601745605469" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PineBase_2" gltf-model="#PineBase_2"  scale="1 1 1" position="-11.980413436889648 22.500925064086914 -90.9845199584961" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1" gltf-model="#PlateTree_1"  scale="1 1 1" position="-145.35804748535156 13.596343040466309 -61.62416458129883" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1_Plate_1" gltf-model="#PlateTree_1_Plate_1"  scale="1 1 1" position="-144.1875457763672 13.73318862915039 -61.3625602722168" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1_Plate_10" gltf-model="#PlateTree_1_Plate_10"  scale="1 1 1" position="-144.8173370361328 14.892518043518066 -61.0760612487793" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1_Plate_11" gltf-model="#PlateTree_1_Plate_11"  scale="1 1 1" position="-146.47506713867188 15.177146911621094 -61.5357780456543" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1_Plate_12" gltf-model="#PlateTree_1_Plate_12"  scale="1 1 1" position="-146.2500762939453 13.005147933959961 -61.796852111816406" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1_Plate_2" gltf-model="#PlateTree_1_Plate_2"  scale="1 1 1" position="-145.94482421875 13.607218742370605 -61.17800521850586" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1_Plate_3" gltf-model="#PlateTree_1_Plate_3"  scale="1 1 1" position="-144.5851593017578 15.83447551727295 -60.59225082397461" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1_Plate_4" gltf-model="#PlateTree_1_Plate_4"  scale="1 1 1" position="-146.26588439941406 14.23755931854248 -61.146636962890625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1_Plate_5" gltf-model="#PlateTree_1_Plate_5"  scale="1 1 1" position="-145.65821838378906 16.82137107849121 -61.244178771972656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1_Plate_6" gltf-model="#PlateTree_1_Plate_6"  scale="1 1 1" position="-145.2942352294922 15.628630638122559 -60.495330810546875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1_Plate_7" gltf-model="#PlateTree_1_Plate_7"  scale="1 1 1" position="-144.96835327148438 12.816732406616211 -62.01757049560547" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1_Plate_8" gltf-model="#PlateTree_1_Plate_8"  scale="1 1 1" position="-145.54171752929688 14.424599647521973 -61.644901275634766" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#PlateTree_1_Plate_9" gltf-model="#PlateTree_1_Plate_9"  scale="1 1 1" position="-145.05303955078125 14.267502784729004 -60.90888977050781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Rack_1" gltf-model="#Rack_1"  scale="1 1 1" position="-21.937702178955078 5.591608047485352 -101.0482177734375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Rack_2" gltf-model="#Rack_2"  scale="1 1 1" position="-4.187164306640625 18.78156852722168 -139.51490783691406" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#RedTree_1" gltf-model="#RedTree_1"  scale="1 1 1" position="10.949063301086426 6.299522876739502 -73.90956115722656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#RedTree_10" gltf-model="#RedTree_10"  scale="1 1 1" position="3.836698532104492 5.767462730407715 -66.17138671875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#RedTree_2" gltf-model="#RedTree_2"  scale="1 1 1" position="10.094648361206055 4.882500648498535 -70.33676147460938" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#RedTree_3" gltf-model="#RedTree_3"  scale="1 1 1" position="14.96707820892334 6.002619743347168 -73.92205810546875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#RedTree_4" gltf-model="#RedTree_4"  scale="1 1 1" position="18.462209701538086 5.892160415649414 -67.34584045410156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#RedTree_5" gltf-model="#RedTree_5"  scale="1 1 1" position="7.904963493347168 6.443309783935547 -72.37451171875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#RedTree_6" gltf-model="#RedTree_6"  scale="1 1 1" position="20.37637710571289 5.772204399108887 -72.69642639160156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#RedTree_8" gltf-model="#RedTree_8"  scale="1 1 1" position="20.06134033203125 5.0743818283081055 -79.94218444824219" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#RedTree_7" gltf-model="#RedTree_7"  scale="1 1 1" position="30.02291488647461 8.832437515258789 -98.91534423828125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#RedTree_9" gltf-model="#RedTree_9"  scale="1 1 1" position="43.80220413208008 8.9144926071167 -75.52607727050781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#RedTreeBig_1" gltf-model="#RedTreeBig_1"  scale="1 1 1" position="2.157655715942383 18.361122131347656 -82.37896728515625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_1_1_Lat" gltf-model="#Ridge_1_1_Lat"  scale="1 1 1" position="48.30979919433594 4.557246208190918 -31.147489547729492" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_1_1_Top" gltf-model="#Ridge_1_1_Top"  scale="1 1 1" position="48.56058883666992 10.133614540100098 -31.029071807861328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_1_Lat" gltf-model="#Ridge_1_Lat"  scale="1 1 1" position="62.52463912963867 1.9935626983642578 -12.49583625793457" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_1_MossChand" gltf-model="#Ridge_1_MossChand"  scale="1 1 1" position="65.5138168334961 17.574909210205078 11.349666595458984" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_1_Rock" gltf-model="#Ridge_1_Rock"  scale="1 1 1" position="53.48164367675781 2.953144073486328 8.815898895263672" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_1_Rock_Floor_1" gltf-model="#Ridge_1_Rock_Floor_1"  scale="1 1 1" position="44.530174255371094 1.2335376739501953 3.929718017578125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_1_Rock_Floor_2" gltf-model="#Ridge_1_Rock_Floor_2"  scale="1 1 1" position="42.92298889160156 0.9671478271484375 6.103763580322266" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_1_Rock_Floor_3" gltf-model="#Ridge_1_Rock_Floor_3"  scale="1 1 1" position="27.285877227783203 0.6423587799072266 -10.436395645141602" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_1_Top" gltf-model="#Ridge_1_Top"  scale="1 1 1" position="65.2711181640625 7.945295810699463 -13.352462768554688" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_2_1_Lat" gltf-model="#Ridge_2_1_Lat"  scale="1 1 1" position="72.88897705078125 6.878903865814209 -8.161046981811523" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_2_1_Top" gltf-model="#Ridge_2_1_Top"  scale="1 1 1" position="73.3104476928711 15.248990058898926 -8.115095138549805" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_2_2_Lat" gltf-model="#Ridge_2_2_Lat"  scale="1 1 1" position="70.9332275390625 3.6858482360839844 -17.644550323486328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_2_2_Top" gltf-model="#Ridge_2_2_Top"  scale="1 1 1" position="70.28065490722656 9.328054428100586 -18.75750732421875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_2_Lat" gltf-model="#Ridge_2_Lat"  scale="1 1 1" position="82.8974609375 9.723169326782227 -23.678878784179688" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_2_Rock" gltf-model="#Ridge_2_Rock"  scale="1 1 1" position="72.07081604003906 9.969949722290039 -40.56796646118164" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_2_Top" gltf-model="#Ridge_2_Top"  scale="1 1 1" position="82.54725646972656 20.187725067138672 -22.539501190185547" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_3_1_Lat" gltf-model="#Ridge_3_1_Lat"  scale="1 1 1" position="64.88395690917969 7.106509208679199 -58.56989669799805" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_3_1_Top" gltf-model="#Ridge_3_1_Top"  scale="1 1 1" position="65.05941772460938 12.682880401611328 -58.84950256347656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_3_Lat" gltf-model="#Ridge_3_Lat"  scale="1 1 1" position="60.207462310791016 0.19316768646240234 -64.22796630859375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_3_Rock" gltf-model="#Ridge_3_Rock"  scale="1 1 1" position="70.58181762695312 13.937817573547363 -58.337059020996094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_3_Rock_2" gltf-model="#Ridge_3_Rock_2"  scale="1 1 1" position="53.902915954589844 5.487936019897461 -53.124603271484375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_3_Top" gltf-model="#Ridge_3_Top"  scale="1 1 1" position="60.29924774169922 5.919851303100586 -64.05094146728516" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_4_1_Lat" gltf-model="#Ridge_4_1_Lat"  scale="1 1 1" position="92.08441162109375 13.683706283569336 16.665077209472656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_4_1_Top" gltf-model="#Ridge_4_1_Top"  scale="1 1 1" position="91.6783447265625 24.938091278076172 16.279850006103516" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_4_2_Lat" gltf-model="#Ridge_4_2_Lat"  scale="1 1 1" position="94.43899536132812 10.91907787322998 -0.9810323715209961" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_4_2_Top" gltf-model="#Ridge_4_2_Top"  scale="1 1 1" position="93.79576110839844 28.687410354614258 -0.44446372985839844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_5_1_Lat" gltf-model="#Ridge_5_1_Lat"  scale="1 1 1" position="70.13664245605469 6.303308010101318 -68.78193664550781" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_5_1_Top" gltf-model="#Ridge_5_1_Top"  scale="1 1 1" position="70.52638244628906 14.6733980178833 -68.61506652832031" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_5_2_Lat" gltf-model="#Ridge_5_2_Lat"  scale="1 1 1" position="84.52610778808594 17.593305587768555 -50.534889221191406" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_5_2_Top" gltf-model="#Ridge_5_2_Top"  scale="1 1 1" position="82.66559600830078 26.30249786376953 -50.357879638671875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_5_Lat" gltf-model="#Ridge_5_Lat"  scale="1 1 1" position="75.9014892578125 14.770838737487793 -72.81146240234375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_5_Top" gltf-model="#Ridge_5_Top"  scale="1 1 1" position="74.15473937988281 27.58338165283203 -71.24404907226562" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_6_Lat" gltf-model="#Ridge_6_Lat"  scale="1 1 1" position="97.86785888671875 28.075471878051758 -19.172300338745117" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_6_Top" gltf-model="#Ridge_6_Top"  scale="1 1 1" position="98.12202453613281 36.94633102416992 -20.34444808959961" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_7_1_Lat" gltf-model="#Ridge_7_1_Lat"  scale="1 1 1" position="93.58958435058594 27.361862182617188 -37.20895004272461" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_7_1_Top" gltf-model="#Ridge_7_1_Top"  scale="1 1 1" position="94.15208435058594 33.02385330200195 -37.505123138427734" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_7_Lat" gltf-model="#Ridge_7_Lat"  scale="1 1 1" position="99.24642944335938 26.739246368408203 -57.353515625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_7_Top" gltf-model="#Ridge_7_Top"  scale="1 1 1" position="96.40850830078125 42.81559371948242 -57.246376037597656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_8_Lat" gltf-model="#Ridge_8_Lat"  scale="1 1 1" position="77.02264404296875 -2.057853937149048 36.09872055053711" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_8_Top" gltf-model="#Ridge_8_Top"  scale="1 1 1" position="76.81681823730469 4.918692588806152 35.89890670776367" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_9_Lat" gltf-model="#Ridge_9_Lat"  scale="1 1 1" position="109.876953125 34.766624450683594 -1.2450141906738281" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_9_Rock" gltf-model="#Ridge_9_Rock"  scale="1 1 1" position="101.15446472167969 31.275882720947266 -3.6559696197509766" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_9_Top" gltf-model="#Ridge_9_Top"  scale="1 1 1" position="110.251220703125 53.071136474609375 -2.1399497985839844" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_Block_1" gltf-model="#Ridge_Block_1"  scale="1 1 1" position="122.72198486328125 59.71849060058594 -62.34024429321289" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_Block_2" gltf-model="#Ridge_Block_2"  scale="1 1 1" position="105.70596313476562 55.14437484741211 -67.22650146484375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_Block_3" gltf-model="#Ridge_Block_3"  scale="1 1 1" position="128.15138244628906 75.68042755126953 -73.0758285522461" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_Block_4" gltf-model="#Ridge_Block_4"  scale="1 1 1" position="91.0644302368164 47.16633987426758 -75.60308837890625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Ridge_Block_5" gltf-model="#Ridge_Block_5"  scale="1 1 1" position="105.70596313476562 47.516845703125 -50.24253463745117" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowCreature_1" gltf-model="#SnowCreature_1"  scale="1 1 1" position="19.945241928100586 24.590065002441406 -108.03302001953125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowCreature_2" gltf-model="#SnowCreature_2"  scale="1 1 1" position="21.612546920776367 25.76894760131836 -103.88429260253906" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowCreature_3" gltf-model="#SnowCreature_3"  scale="1 1 1" position="23.779748916625977 21.591102600097656 -103.28474426269531" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowCreature_4" gltf-model="#SnowCreature_4"  scale="1 1 1" position="18.739662170410156 21.09406280517578 -106.7271728515625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowCreatureB_1" gltf-model="#SnowCreatureB_1"  scale="1 1 1" position="17.70585060119629 25.16659927368164 -108.79164123535156" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowCreatureB_2" gltf-model="#SnowCreatureB_2"  scale="1 1 1" position="18.832460403442383 24.22962188720703 -104.47763061523438" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowCreatureB_3" gltf-model="#SnowCreatureB_3"  scale="1 1 1" position="12.724648475646973 28.845760345458984 -110.48971557617188" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowCreatureB_4" gltf-model="#SnowCreatureB_4"  scale="1 1 1" position="23.57533836364746 18.731069564819336 -101.76359558105469" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowCreatureB_5" gltf-model="#SnowCreatureB_5"  scale="1 1 1" position="25.15009307861328 22.319622039794922 -100.22311401367188" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowCreatureB_6" gltf-model="#SnowCreatureB_6"  scale="1 1 1" position="15.058563232421875 22.878063201904297 -111.40628051757812" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowyMountain_1" gltf-model="#SnowyMountain_1"  scale="1 1 1" position="-42.86467742919922 40.43901443481445 -171.2549285888672" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowyMountain_2" gltf-model="#SnowyMountain_2"  scale="1 1 1" position="43.530723571777344 25.517621994018555 -165.90350341796875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowyMountain_3" gltf-model="#SnowyMountain_3"  scale="1 1 1" position="107.0921401977539 49.43306350708008 -145.79116821289062" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#SnowyMountain_4" gltf-model="#SnowyMountain_4"  scale="1 1 1" position="-21.484054565429688 44.36799240112305 -198.97003173828125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WoodenPlaza" gltf-model="#WoodenPlaza"  scale="1 1 1" position="65.56366729736328 17.2891902923584 6.0792083740234375" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_1" gltf-model="#WPlant_1"  scale="1 1 1" position="3.8154172897338867 0.8353204727172852 3.098888397216797" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_2" gltf-model="#WPlant_2"  scale="1 1 1" position="2.3757801055908203 0.4615964889526367 2.3242340087890625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_3_Leaf_1" gltf-model="#WPlant_3_Leaf_1"  scale="1 1 1" position="2.6076583862304688 2.354677200317383 4.394721984863281" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_3_Leaf_2" gltf-model="#WPlant_3_Leaf_2"  scale="1 1 1" position="1.5844802856445312 2.234410285949707 3.9907150268554688" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_3_Leaf_3" gltf-model="#WPlant_3_Leaf_3"  scale="1 1 1" position="2.441476821899414 2.0858192443847656 3.2485008239746094" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_3_Stem" gltf-model="#WPlant_3_Stem"  scale="1 1 1" position="1.9813823699951172 0.8782024383544922 3.769916534423828" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_4" gltf-model="#WPlant_4"  scale="1 1 1" position="-3.0697994232177734 0.36337947845458984 -4.38507080078125" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_5_1" gltf-model="#WPlant_5_1"  scale="1 1 1" position="4.618967056274414 0.9982433319091797 -3.1363983154296875" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_5_2" gltf-model="#WPlant_5_2"  scale="1 1 1" position="3.0471878051757812 0.8080606460571289 -3.4527950286865234" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_5_2_Lily_1" gltf-model="#WPlant_5_2_Lily_1"  scale="1 1 1" position="4.324407577514648 1.2134933471679688 -2.931903839111328" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_5_2_Lily_2" gltf-model="#WPlant_5_2_Lily_2"  scale="1 1 1" position="4.344260215759277 1.2462806701660156 -3.4240760803222656" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_6_1" gltf-model="#WPlant_6_1"  scale="1 1 1" position="-2.002002716064453 0.7773714065551758 5.831916809082031" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_6_2" gltf-model="#WPlant_6_2"  scale="1 1 1" position="-2.2051620483398438 0.5627450942993164 5.749195098876953" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_7_1" gltf-model="#WPlant_7_1"  scale="1 1 1" position="-4.64996337890625 0.7408237457275391 0.1655426025390625" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_7_2" gltf-model="#WPlant_7_2"  scale="1 1 1" position="-4.431173324584961 1.0926332473754883 0.22424697875976562" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_7_3" gltf-model="#WPlant_7_3"  scale="1 1 1" position="-4.57838249206543 0.5832576751708984 0.10453019291162491" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#WPlant_8" gltf-model="#WPlant_8"  scale="1 1 1" position="6.586721420288086 1.13958740234375 0.9853363037109375" visible="true" shadow="cast: false" ></a-entity>
+
+            <!-- Camera -->
+            <a-entity id="player"
+                position="0 -0.2 0"
+                movement-controls="speed: 0.029999999329447746;">
+                <a-entity camera
+                    camera="near: 0.001"
+                    wasd-controls="acceleration:50; fly: true"
+                    speed="0.5"
+                    position="0 1.7000000476837158 0"
+                    look-controls="pointerLockEnabled: true">
+                        <a-entity id="cursor" cursor="fuse: false;" animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 50; from: 	0.1 0.1 0.1; to: 1 1 1"
+                            position="0 0 -0.1"
+                            geometry="primitive: circle; radius: 0.001;"
+                            material="color: #CCC; shader: flat;"
+                            >
+                        </a-entity>
+                </a-entity>
+                    
+            </a-entity>
+
+            <!-- Lights -->
+            
+
+            <!-- Sky -->
+            <a-sky src="#sky" material="" geometry="" rotation="0 90 0"></a-sky>
+        </a-scene>
+    </body>
+</html>
+<!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+<!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->
