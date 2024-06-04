@@ -31,7 +31,7 @@
 				"f_player_speed":0.029999999329447746,
 				"s_anisotropy":"2",
 				"b_cubemap_background":0,
-				"b_show_env_sky":1,
+				"b_show_env_sky":0,
 				"b_cubemap":0,
 				"b_camera_cube":0,
 				"s_cubemap_ext":"jpg",
@@ -46,8 +46,20 @@
 	],
 	"nodes":[
 		{
+			"extras":{
+				"diff_growth_settings":{
+					"growth_dir_obj":{}
+				},
+				"ant_landscape":{}
+			},
 			"mesh":0,
 			"name":"algae_h_12",
+			"rotation":[
+				-0.36482465267181396,
+				0.6057248711585999,
+				0.6057251691818237,
+				0.36482515931129456
+			],
 			"scale":[
 				2.4021668434143066,
 				2.4021668434143066,
