@@ -15,6 +15,7 @@
         <script type="text/javascript" src="js/webxr.js"></script>
         <script type="text/javascript" src="js/joystick.js"></script>
         <script type="text/javascript" src="js/camera-cube-env.js"></script>
+        <script type="text/javascript" src="js/howler.js"></script>
 
         <!-- Habilita el twoway-motion en móbil - Desplazamiento por toque de pantalla -->
         <script src="https://rawgit.com/Ctrl-Alt-Zen/aframe-mobile-controls/master/components/twoway-motion/twoway-motion.js"></script>
@@ -41,6 +42,40 @@
             }
 
             document.body.addEventListener("touchstart", createDoubleTapPreventer(500), { passive: false });
+        </script>
+
+
+        <!-- Música, con howler.js -->
+        <script>
+        let i;
+        let timer;
+        var sound = new Howl({
+          src: ['shoeg-liminal-state.mp3'],
+          autoplay: true,
+          loop: true,
+          volume: 0.5
+        });
+        let playTimer = true;
+        const timerDisplay = document.getElementById("timerDisplay");
+        const startTimerBtn = document.getElementById("startTimer");
+
+        startTimerBtn.addEventListener("click", () => {
+          i = 5;
+
+          timer = setInterval(() => {
+            if (playTimer == true) {
+              if (i != 0) {
+                timerDisplay.textContent = i;
+                i--;
+              }
+
+              if (i == 0) {
+                sound.play();
+                clearInterval(timer);
+              }
+            }
+          }, 1000);
+        });
         </script>
 
         <link rel="stylesheet" type="text/css" href="style.css">
@@ -72,8 +107,6 @@
         <a-scene loading-screen="dotsColor: black; backgroundColor: aquamarine; enabled: false" obb-collider="showColliders: false" shadow="type: basic; autoUpdate: false;" renderer="antialias: true; colorManagement: true; physicallyCorrectLights: false; sortTransparentObjects: true; logarithmicDepthBuffer: true; precision: high; anisotropy: 2;">
             <!-- Assets -->
             <a-assets>
-
-                <audio id="music" src="shoeg-liminal-state.mp3" preload="auto"></audio>
 
         				<a-asset-item id="Center" src="./assets/Center.gltf"></a-asset-item>
         				<a-asset-item id="Forest_2" src="./assets/Forest_2.gltf"></a-asset-item>
@@ -132,9 +165,7 @@
             <!-- Sky -->
             <a-sky src="#sky" material="" geometry="" rotation="0 90 0"></a-sky>
 
-            <!-- Sound -->
-            <a-sound src="#music" autoplay="true" loop="true" volume="0.5"></a-sound>
-
         </a-scene>
+
     </body>
 </html>
