@@ -22,28 +22,6 @@
 
         <!-- Deshabilita el double tap / lupa en móvil -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0, user-scalable=no">
-        <script>
-            function createDoubleTapPreventer(timeout_ms: number) {
-              let dblTapTimer = 0;
-              let dblTapPressed = false;
-
-              return function (e: TouchEvent) {
-                  clearTimeout(dblTapTimer);
-                  if (dblTapPressed) {
-                      e.preventDefault();
-                      dblTapPressed = false;
-                  } else {
-                      dblTapPressed = true;
-                      dblTapTimer = setTimeout(() => {
-                          dblTapPressed = false;
-                      }, timeout_ms);
-                  }
-              };
-            }
-
-            document.body.addEventListener("touchstart", createDoubleTapPreventer(500), { passive: false });
-        </script>
-
 
         <!-- Música, con howler.js -->
         <script>
@@ -92,6 +70,28 @@
             event.preventDefault(); // Prevents the default touch behavior
             startTimer();
         });
+        </script>
+
+        <script>
+            function createDoubleTapPreventer(timeout_ms: number) {
+              let dblTapTimer = 0;
+              let dblTapPressed = false;
+
+              return function (e: TouchEvent) {
+                  clearTimeout(dblTapTimer);
+                  if (dblTapPressed) {
+                      e.preventDefault();
+                      dblTapPressed = false;
+                  } else {
+                      dblTapPressed = true;
+                      dblTapTimer = setTimeout(() => {
+                          dblTapPressed = false;
+                      }, timeout_ms);
+                  }
+              };
+            }
+
+            document.body.addEventListener("touchstart", createDoubleTapPreventer(500), { passive: false });
         </script>
 
         <link rel="stylesheet" type="text/css" href="style.css">
