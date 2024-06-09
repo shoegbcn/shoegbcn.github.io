@@ -1,23 +1,26 @@
 <!doctype html>
 <html lang="en">
-    <!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+    <!-- Generado con AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
     <!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->
+    <!-- Modificado y actualizado para AFrame 1.6.0 por Carlos Martorell -->
     <head>
-        <title>WebXR Application</title>
+        <title>WE ARE THE AI RESYNTHESIZERS x SHOEG</title>
         <link rel="icon" type="image/png" href="favicon.ico"/>
         <meta name="description" content="3D Application">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0, user-scalable=no">
+
         <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
         <script type="text/javascript" src="js/webxr.js"></script>
         <script type="text/javascript" src="js/joystick.js"></script>
         <script type="text/javascript" src="js/camera-cube-env.js"></script>
+
+        <!-- Habilita el twoway-motion en móbil - Desplazamiento por toque de pantalla -->
         <script src="https://rawgit.com/Ctrl-Alt-Zen/aframe-mobile-controls/master/components/twoway-motion/twoway-motion.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="style.css">
-
+        <!-- Deshabilita el double tap / lupa en móvil -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0, user-scalable=no">
         <script>
             function createDoubleTapPreventer(timeout_ms: number) {
               let dblTapTimer = 0;
@@ -40,6 +43,9 @@
             document.body.addEventListener("touchstart", createDoubleTapPreventer(500), { passive: false });
         </script>
 
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+        <!-- Deshabilita el selector en móvil -->
         <style>
           body, html {
             user-select: none;
@@ -61,11 +67,13 @@
 
     </head>
     <body onload="init();">
-        <a-scene loading-screen="dotsColor: black; backgroundColor: aquamarine; enabled: false" obb-collider="showColliders: false" shadow="type: basic; autoUpdate: false;" renderer="antialias: true; colorManagement: true; physicallyCorrectLights: false; sortTransparentObjects: true; logarithmicDepthBuffer: true; precision: high; anisotropy: 2;"> <!-- no: stats -->
+
+        <!-- 'stats' deshabilitados -->
+        <a-scene loading-screen="dotsColor: black; backgroundColor: aquamarine; enabled: false" obb-collider="showColliders: false" shadow="type: basic; autoUpdate: false;" renderer="antialias: true; colorManagement: true; physicallyCorrectLights: false; sortTransparentObjects: true; logarithmicDepthBuffer: true; precision: high; anisotropy: 2;">
             <!-- Assets -->
             <a-assets>
 
-                <audio id="river" src="river.mp3" preload="auto"></audio>
+                <audio id="music" src="shoeg-liminal-state.mp3" preload="auto"></audio>
 
         				<a-asset-item id="Center" src="./assets/Center.gltf"></a-asset-item>
         				<a-asset-item id="Forest_2" src="./assets/Forest_2.gltf"></a-asset-item>
@@ -90,7 +98,7 @@
 
             <!-- Entities -->
 
-			<a-entity id="#Center" gltf-model="#Center"  scale="1 1 1" position="0.12615780532360077 3.6527774333953857 -0.20377731323242188" visible="true" shadow="cast: false;" sound="src: #river; autoplay: true; loop: true;"></a-entity>
+			<a-entity id="#Center" gltf-model="#Center"  scale="1 1 1" position="0.12615780532360077 3.6527774333953857 -0.20377731323242188" visible="true" shadow="cast: false;" ></a-entity>
 			<a-entity id="#Forest_2" gltf-model="#Forest_2"  scale="1 1 1" position="35.366905212402344 3.961367130279541 1.1018842458724976" visible="true" shadow="cast: false;" ></a-entity>
 			<a-entity id="#H1" gltf-model="#H1"  scale="1 1 1" position="-145.8111114501953 15.507888793945312 -66.63512420654297" visible="true" shadow="cast: false;" ></a-entity>
 			<a-entity id="#Island_1" gltf-model="#Island_1"  scale="1 1 1" position="-31.165252685546875 14.794805526733398 -26.947162628173828" visible="true" shadow="cast: false;" ></a-entity>
@@ -119,15 +127,14 @@
                             >
                         </a-entity>
                 </a-entity>
-
             </a-entity>
-
-            <!-- Lights -->
 
             <!-- Sky -->
             <a-sky src="#sky" material="" geometry="" rotation="0 90 0"></a-sky>
+
+            <!-- Sound -->
+            <a-sound src="#music" autoplay="true" loop="true" volume="0.5"></a-sound>
+
         </a-scene>
     </body>
 </html>
-<!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
-<!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->
