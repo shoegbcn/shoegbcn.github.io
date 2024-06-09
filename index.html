@@ -14,8 +14,16 @@
         <script type="text/javascript" src="js/webxr.js"></script>
         <script type="text/javascript" src="js/joystick.js"></script>
         <script type="text/javascript" src="js/camera-cube-env.js"></script>
+        <script src="https://rawgit.com/Ctrl-Alt-Zen/aframe-mobile-controls/master/components/twoway-motion/twoway-motion.js"></script>
 
         <link rel="stylesheet" type="text/css" href="style.css">
+
+        <style>
+          body, html {
+            user-select: none;
+          }
+        </style>
+
     </head>
     <body onload="init();">
         <a-scene loading-screen="dotsColor: black; backgroundColor: aquamarine; enabled: false" obb-collider="showColliders: false" shadow="type: basic; autoUpdate: false;" renderer="antialias: true; colorManagement: true; physicallyCorrectLights: false; sortTransparentObjects: true; logarithmicDepthBuffer: true; precision: high; anisotropy: 2;"> <!-- no: stats -->
@@ -63,6 +71,7 @@
                 position="0 -0.2 0"
                 movement-controls="speed: 0.029999999329447746;">
                 <a-entity camera
+                    twoway-motion="speed: 35"
                     camera="near: 0.001"
                     wasd-controls="acceleration:50; fly: true"
                     speed="0.5"
