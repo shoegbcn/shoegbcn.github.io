@@ -18,11 +18,40 @@
 
         <link rel="stylesheet" type="text/css" href="style.css">
 
+        <script>
+            function createDoubleTapPreventer(timeout_ms: number) {
+              let dblTapTimer = 0;
+              let dblTapPressed = false;
+
+              return function (e: TouchEvent) {
+                  clearTimeout(dblTapTimer);
+                  if (dblTapPressed) {
+                      e.preventDefault();
+                      dblTapPressed = false;
+                  } else {
+                      dblTapPressed = true;
+                      dblTapTimer = setTimeout(() => {
+                          dblTapPressed = false;
+                      }, timeout_ms);
+                  }
+              };
+            }
+
+            document.body.addEventListener("touchstart", createDoubleTapPreventer(500), { passive: false });
+        </script>
+
         <style>
           body, html {
             user-select: none;
             -webkit-tap-highlight-color: transparent;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-user-callout: none;
+            -webkit-user-callout: none;
+            -webkit-user-select: none;
+            -webkit-user-drag: none;
+            -webkit-user-modify: none;
+            -webkit-highlight: none;
+            touch-action: manipulation;
           }
           :root {
             touch-action: pan-x pan-y;
