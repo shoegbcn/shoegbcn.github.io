@@ -59,22 +59,38 @@
         const timerDisplay = document.getElementById("timerDisplay");
         const startTimerBtn = document.getElementById("startTimer");
 
-        startTimerBtn.addEventListener("click", () => {
-          i = 5;
+        function startTimer() {
+            i = 5;
 
-          timer = setInterval(() => {
-            if (playTimer == true) {
-              if (i != 0) {
-                timerDisplay.textContent = i;
-                i--;
-              }
+            timer = setInterval(() => {
+                if (playTimer) {
+                    if (i != 0) {
+                        timerDisplay.textContent = i;
+                        i--;
+                    }
 
-              if (i == 0) {
-                sound.play();
-                clearInterval(timer);
-              }
+                    if (i == 0) {
+                        sound.play();
+                        clearInterval(timer);
+                    }
+                }
+            }, 1000);
+        }
+
+        // Add click event listener
+        startTimerBtn.addEventListener('click', startTimer);
+
+        // Add keydown event listener (e.g., for the 'Enter' key)
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                startTimer();
             }
-          }, 1000);
+        });
+
+        // Add touchstart event listener for mobile devices
+        startTimerBtn.addEventListener('touchstart', (event) => {
+            event.preventDefault(); // Prevents the default touch behavior
+            startTimer();
         });
         </script>
 
