@@ -2,10 +2,12 @@
 // thread. Posts lightweight per-tick state (~60 Hz) and a heavier graph/series
 // payload only on a day change (~3 Hz). Touches no DOM and no FMOD.
 
-// .NET runtime is imported at top level (module worker) so the import fully settles
-// before any `init` message is handled. A lazy import triggered from inside the message
-// handler leaves dotnet.create() hanging on some static hosts (e.g. GitHub Pages); a
-// failed top-level import rejects worker module load -> surfaces via app.js worker.onerror.
+// .NET runtime is imported AND created at top level (module worker), so the runtime is
+// fully ready independent of when the `init` message arrives. A lazy import/create driven
+// from inside the message handler races worker module evaluation and intermittently hangs
+// dotnet.create() on static hosts (e.g. GitHub Pages). An `init` that arrives before the
+// runtime is ready is queued (pendingInit) and applied when the boot promise resolves;
+// one that arrives after is applied immediately. Either ordering works.
 const { dotnet } = await import(new URL("./_framework/dotnet.js", import.meta.url).href);
 
 let Engine = null;
@@ -35,6 +37,7 @@ const READOUT_VARS = [
 
 let keys = [];
 let runtimeReady = false;
+let pendingInit = null; // an `init` cfg that arrived before the runtime was ready
 let _wasmBytes = null; // getter -> total WASM linear-memory bytes, or null if unreachable
 
 // performance.memory does not exist in Web Workers, so the engine metric instead reports
@@ -63,8 +66,15 @@ async function ensureRuntime() {
   runtimeReady = true;
 }
 
-async function boot() {
-  await ensureRuntime();
+// Create the runtime now, at module load — not on the `init` message. When it resolves,
+// apply a queued init if one already arrived; if the runtime fails, report it once.
+const runtimeBoot = ensureRuntime().then(
+  () => { if (pendingInit !== null) { const c = pendingInit; pendingInit = null; applyInit(c); } },
+  (err) => postMessage({ type: "error", error: String(err) }),
+);
+
+function applyInit(c) {
+  cfg = { ...cfg, ...(c || {}) };
   start();
 }
 
@@ -127,8 +137,9 @@ function postSeries() {
 self.addEventListener("message", (e) => {
   const m = e.data;
   if (m.type === "init") {
-    cfg = { ...cfg, ...(m.cfg || {}) };
-    boot().catch((err) => postMessage({ type: "error", error: String(err) }));
+    // If the runtime is already up, start now; otherwise queue until runtimeBoot resolves.
+    if (runtimeReady) applyInit(m.cfg);
+    else pendingInit = m.cfg || {};
   } else if (m.type === "reset") {
     // Match Unity ResetSimulation: new random seed AND random bay (temp 0, year start
     // are handled by Engine.Init re-creating the generator at REFERENCE_YEAR).
