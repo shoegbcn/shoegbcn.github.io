@@ -1,0 +1,13 @@
+console.log("[bare] worker start");
+const url = new URL("./_framework/dotnet.js", import.meta.url).href;
+const { dotnet } = await import(url);
+console.log("[bare] imported dotnet");
+const p = dotnet.create();
+const t = setInterval(() => console.log("[bare] waiting"), 1000);
+const rt = await p;
+clearInterval(t);
+console.log("[bare] CREATED");
+const cfg = rt.getConfig();
+console.log("[bare] mainAssembly", cfg.mainAssemblyName);
+const ex = await rt.getAssemblyExports(cfg.mainAssemblyName);
+console.log("[bare] exports", Object.keys(ex), Object.keys(ex.DiatomBloom||{}));
