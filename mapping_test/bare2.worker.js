@@ -6,10 +6,9 @@ self.addEventListener("message", async (e) => {
   console.log("[bare2] CREATED");
   const cfg = rt.getConfig();
   const ex = await rt.getAssemblyExports(cfg.mainAssemblyName);
-  console.log("[bare2] exports", Object.keys(ex || {}), "DiatomBloom =", Object.keys(ex.DiatomBloom || {}));
-  const Engine = ex.DiatomBloom.Engine;
-  console.log("[bare2] Engine type =", typeof Engine);
-  console.log("[bare2] calling Init");
+  console.log("[bare2] top keys =", Object.keys(ex));
+  const Engine = ex.Engine ?? ex.DiatomBloom?.Engine;
+  console.log("[bare2] Engine type =", typeof Engine, "Init type =", typeof Engine?.Init);
   Engine.Init("alfacs", 0, 120);
   console.log("[bare2] Init done");
   const keys = Engine.GetSpeciesKeys();
