@@ -62,7 +62,10 @@ async function ensureRuntime() {
         "). Serve the PUBLISH output (it contains the _framework/ folder); the source wwwroot does not.");
     }
   }
-  const builder = dotnet.withDiagnosticTracing(true);
+  const builder = dotnet
+  .withDiagnosticTracing(true)
+  .withRuntimeOptions(["--trace=all"])
+  .withConfig({ logLevel: "trace" });
   console.log("[boot] before create");
   const p = builder.create();
   p.then(() => console.log("[boot] create RESOLVED"))
