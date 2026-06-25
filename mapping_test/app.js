@@ -45,6 +45,7 @@ async function boot() {
   };
   worker.onmessage = (e) => {
     const m = e.data;
+    console.log("[app] worker msg:", m.type, m.error || "");
     if (m.type === "ready") {
       keys = m.keys;
       try {
