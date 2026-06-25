@@ -132,7 +132,7 @@ function postSeries() {
   postMessage({ type: "series", date: Engine.GetCurrentDate(), env, pop, readouts });
 }
 
-onmessage = (e) => {
+self.addEventListener("message", (e) => {
   const m = e.data;
   if (m.type === "init") {
     cfg = { ...cfg, ...(m.cfg || {}) };
@@ -153,4 +153,4 @@ onmessage = (e) => {
     paused = !!m.value;
     if (!paused) last = performance.now(); // avoid a dt spike on resume
   }
-};
+});
