@@ -2,13 +2,15 @@
 // thread. Posts lightweight per-tick state (~60 Hz) and a heavier graph/series
 // payload only on a day change (~3 Hz). Touches no DOM and no FMOD.
 
-// .NET runtime is imported AND created at top level (module worker), so the runtime is
-// fully ready independent of when the `init` message arrives. A lazy import/create driven
-// from inside the message handler races worker module evaluation and intermittently hangs
-// dotnet.create() on static hosts (e.g. GitHub Pages). An `init` that arrives before the
-// runtime is ready is queued (pendingInit) and applied when the boot promise resolves;
-// one that arrives after is applied immediately. Either ordering works.
-const { dotnet } = await import(new URL("./_framework/dotnet.js", import.meta.url).href);
+// .NET runtime is imported and created via a promise chain (NOT a top-level await), so
+// module evaluation completes synchronously and the message listener at the bottom is
+// registered before any `init` can arrive — a top-level await defers that registration
+// past the import and drops the app's immediately-posted `init`. Import is awaited before
+// create() because create() hangs on static hosts (e.g. GitHub Pages) if the runtime
+// import has not fully settled first. An `init` that arrives before the runtime is ready
+// is queued (pendingInit) and applied when the boot chain resolves; a later one is applied
+// immediately. Either ordering works.
+let dotnet = null;
 
 let Engine = null;
 let last = 0;
@@ -66,12 +68,14 @@ async function ensureRuntime() {
   runtimeReady = true;
 }
 
-// Create the runtime now, at module load — not on the `init` message. When it resolves,
-// apply a queued init if one already arrived; if the runtime fails, report it once.
-const runtimeBoot = ensureRuntime().then(
-  () => { if (pendingInit !== null) { const c = pendingInit; pendingInit = null; applyInit(c); } },
-  (err) => postMessage({ type: "error", error: String(err) }),
-);
+// Boot off the event loop (does not block module evaluation): import the runtime, then
+// create it, then drain any init that arrived early. Failure is reported once.
+const runtimeBoot = import(new URL("./_framework/dotnet.js", import.meta.url).href)
+  .then((mod) => { dotnet = mod.dotnet; return ensureRuntime(); })
+  .then(
+    () => { if (pendingInit !== null) { const c = pendingInit; pendingInit = null; applyInit(c); } },
+    (err) => postMessage({ type: "error", error: String(err) }),
+  );
 
 function applyInit(c) {
   cfg = { ...cfg, ...(c || {}) };
