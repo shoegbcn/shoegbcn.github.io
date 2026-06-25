@@ -1,6 +1,5 @@
 console.log("[bare2] start");
-const { dotnet } = await import(new URL("./_framework/dotnet.js", import.meta.url).href);
-console.log("[bare2] imported");
+let dotnet;
 self.addEventListener("message", async (e) => {
   console.log("[bare2] got message, creating");
   const rt = await dotnet.create();
@@ -9,3 +8,5 @@ self.addEventListener("message", async (e) => {
   const ex = await rt.getAssemblyExports(cfg.mainAssemblyName);
   console.log("[bare2] exports", Object.keys(ex.DiatomBloom || {}));
 });
+({ dotnet } = await import(new URL("./_framework/dotnet.js", import.meta.url).href));
+console.log("[bare2] imported, ready for message");
