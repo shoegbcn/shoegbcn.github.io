@@ -62,21 +62,11 @@ async function ensureRuntime() {
         "). Serve the PUBLISH output (it contains the _framework/ folder); the source wwwroot does not.");
     }
   }
-  const builder = dotnet
-  .withDiagnosticTracing(true)
-  .withRuntimeOptions(["--trace=all"])
-  .withConfig({ logLevel: "trace" });
-  console.log("[boot] before create");
   const runtime = await dotnet.create();
-  console.log("[boot] after create");
-  console.log("[boot] runtime created");
   const { getAssemblyExports, getConfig } = runtime;
   const config = getConfig();
-  console.log("[boot] mainAssembly =", config.mainAssemblyName);
   const exports = await getAssemblyExports(config.mainAssemblyName);
-  console.log("[boot] exports keys =", Object.keys(exports || {}), "DiatomBloom =", Object.keys(exports?.DiatomBloom || {}));
   Engine = exports.DiatomBloom.Engine;
-  console.log("[boot] Engine =", typeof Engine);
   _wasmBytes = resolveWasmBytes(runtime);
   runtimeReady = true;
 }
