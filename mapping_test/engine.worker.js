@@ -63,10 +63,14 @@ async function ensureRuntime() {
     }
   }
   const runtime = await dotnet.withDiagnosticTracing(true).create();
+  console.log("[boot] runtime created");
   const { getAssemblyExports, getConfig } = runtime;
   const config = getConfig();
+  console.log("[boot] mainAssembly =", config.mainAssemblyName);
   const exports = await getAssemblyExports(config.mainAssemblyName);
+  console.log("[boot] exports keys =", Object.keys(exports || {}), "DiatomBloom =", Object.keys(exports?.DiatomBloom || {}));
   Engine = exports.DiatomBloom.Engine;
+  console.log("[boot] Engine =", typeof Engine);
   _wasmBytes = resolveWasmBytes(runtime);
   runtimeReady = true;
 }
