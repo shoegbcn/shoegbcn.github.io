@@ -1,187 +1,182 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <!-- Generado con AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
-    <!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->
-    <!-- Modificado y actualizado para AFrame 1.6.0 por Carlos Martorell -->
-    <head>
-        <title>WE ARE THE AI RESYNTHESIZERS x SHOEG</title>
-        <link rel="icon" type="image/png" href="favicon.ico"/>
-        <meta name="description" content="3D Application">
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <title>Mapping the Invisible</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
-        <script type="text/javascript" src="js/webxr.js"></script>
-        <script type="text/javascript" src="js/joystick.js"></script>
-        <script type="text/javascript" src="js/camera-cube-env.js"></script>
-        <script type="text/javascript" src="js/howler.js"></script>
+    <!-- Colleague's stylesheet — owns body, #card, model-viewer, #ar-button, #qr-button -->
+    <link rel="stylesheet" href="demo-styles.css" />
 
-        <!-- Habilita el twoway-motion en móbil - Desplazamiento por toque de pantalla -->
-        <script src="https://rawgit.com/Ctrl-Alt-Zen/aframe-mobile-controls/master/components/twoway-motion/twoway-motion.js"></script>
+    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
 
-        <!-- Deshabilita el double tap / lupa en móvil -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0, user-scalable=no">
+    <!-- Sonic Silica overlay styles. Scoped to the overlay only; nothing here restyles
+         body / #card / model-viewer / #ar-button / #qr-button, so demo-styles.css keeps
+         full control of the 3D layer and the AR/QR buttons. -->
+    <style>
+      @font-face {
+        font-family: 'Iosevka'; font-style: normal; font-weight: 400; font-display: swap;
+        src: url(https://cdn.jsdelivr.net/fontsource/fonts/iosevka@latest/latin-400-normal.woff2) format('woff2'),
+             url(fonts/iosevka-latin-400-normal.woff2) format('woff2'),
+             url(/font/iosevka-term-regular.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Iosevka'; font-style: normal; font-weight: 700; font-display: swap;
+        src: url(https://cdn.jsdelivr.net/fontsource/fonts/iosevka@latest/latin-700-normal.woff2) format('woff2'),
+             url(fonts/iosevka-latin-700-normal.woff2) format('woff2'),
+             url(/font/iosevka-term-regular.ttf) format('truetype');
+      }
 
-        <!-- Música, con howler.js -->
-        <script>
-        let i;
-        let timer;
-        var sound = new Howl({
-          src: ['shoeg-liminal-state.mp3'],
-          autoplay: true,
-          loop: true,
-          volume: 0.5
-        });
-        let playTimer = true;
-        const timerDisplay = document.getElementById("timerDisplay");
-        const startTimerBtn = document.getElementById("startTimer");
+      :root { --bg:#0c0e12; --panel:#14171d; --line:#232833; --fg:#fff; --dim:#a6a6a6; }
 
-        function startTimer() {
-            i = 5;
+      /* Scope the reset + font to the overlay so the colleague's layout is untouched. */
+      #dash, #dash *, #prestart, #prestart *, #status, #foldbar, #foldbar * { box-sizing:border-box; }
+      #dash, #prestart, #status, #foldbar { font-family:'Iosevka', ui-monospace, Menlo, monospace; }
+      #dash button, #prestart button, #foldbar button { font-family:inherit; } /* buttons don't inherit font-family by default */
 
-            timer = setInterval(() => {
-                if (playTimer) {
-                    if (i != 0) {
-                        timerDisplay.textContent = i;
-                        i--;
-                    }
+      /* Overlay: covers the viewport above the 3D layer; click-through except the bars,
+         so the model stays draggable and the AR/QR buttons stay clickable. */
+      #dash { display:none; position:fixed; inset:0; z-index:5; pointer-events:none; color:var(--fg); font-size:12px; }
+      #dash.live { display:grid; grid-template-rows:1fr 44px 44px; }
+      .infobar, .bottombar, .pagenav, .pages { pointer-events:auto; }
 
-                    if (i == 0) {
-                        sound.play();
-                        clearInterval(timer);
-                    }
-                }
-            }, 1000);
-        }
+      .pages { position:relative; min-height:0; overflow:hidden; grid-row:1; }
+      .page { position:absolute; inset:0; display:none; padding:8px; }
+      .page.active { display:block; }
+      .page0.active { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:6px; }
+      .page1.active { display:flex; flex-direction:column; gap:8px; padding:14px; }
 
-        // Add click event listener
-        startTimerBtn.addEventListener('click', startTimer);
+      .panel { background:var(--panel); border:1px solid var(--line); border-radius:6px; display:flex; flex-direction:column; min-height:0; }
+      .panel-hd { display:flex; align-items:center; gap:8px; padding:5px 8px; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+      .panel-title { font-weight:700; }
+      .legend { display:inline-flex; align-items:center; gap:3px; font-size:9px; }
+      .legend .lt { color:var(--dim); } .legend .lv { color:var(--fg); font-weight:700; }
+      .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+      .graph { flex:1; width:100%; min-height:0; }
 
-        // Add keydown event listener (e.g., for the 'Enter' key)
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                startTimer();
-            }
-        });
+      .prop-header { color:var(--dim); padding:0 4px 4px; }
+      .prop-table { display:flex; flex-direction:column; gap:2px; max-width:840px; }
+      .prop-row { display:grid; grid-template-columns:200px 80px 56px 1fr 130px 50px; align-items:center; gap:10px; padding:3px 6px; }
+      .prop-row.head { color:var(--dim); border-bottom:1px solid var(--line); }
+      .c-name { display:flex; align-items:center; gap:8px; font-size:14px; }
+      .c-pop, .c-prop { text-align:right; color:#d2dae6; }
+      .c-bar { background:rgba(38,41,51,.9); height:6px; border-radius:3px; position:relative; overflow:hidden; }
+      .c-bar .bar { height:100%; width:0; opacity:.7; transition:width .1s linear; }
+      .c-pan { position:relative; height:14px; background:rgba(38,41,51,.9); border-radius:3px; }
+      .pan-center { position:absolute; left:50%; top:0; bottom:0; width:1px; background:rgba(102,102,128,.8); }
+      .pan-marker { position:absolute; top:3px; width:8px; height:8px; border-radius:50%; transform:translateX(-50%); transition:left .1s linear; }
+      .c-panv { text-align:right; color:#9aa6bd; font-size:13px; }
 
-        // Add touchstart event listener for mobile devices
-        startTimerBtn.addEventListener('touchstart', (event) => {
-            event.preventDefault(); // Prevents the default touch behavior
-            startTimer();
-        });
-        </script>
+      /* InfoBar (upper bottom bar) */
+      .infobar { position:relative; background:rgba(26,26,26,.92); border-top:1px solid var(--line); grid-row:2; }
+      .ib-title { position:absolute; left:12px; top:50%; transform:translateY(-50%); font-weight:700; font-size:13px; }
+      .ib-bay { font-weight:700; font-size:13px; }
+      .ib-center { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:center; gap:8px; font-size:13px; white-space:nowrap; }
+      .ib-sep { color:rgba(102,102,128,.85); }
+      .ib-date { font-weight:700; }
+      .ib-right { position:absolute; right:8px; top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:8px; }
+      .voices { color:#838ea6; min-width:40px; text-align:right; font-size:10px; }
+      .ctrl { background:#1b1f27; color:var(--fg); border:1px solid var(--line); border-radius:4px; padding:3px 10px; cursor:pointer; font-size:10px; }
+      .ctrl:hover { background:#232833; }
+      .ctrl.muted { background:#7a1f1f; border-color:#b33; color:#ffd9d9; }
+      .ctrl.muted:hover { background:#8f2525; }
+      .ctrl.paused { background:#7a5a1f; border-color:#b9912e; color:#ffeccc; }
+      .ctrl.paused:hover { background:#8f6b25; }
+      .ctrl.ended { background:#2a2f3a; color:#838ea6; }
+      .ctrl:disabled { cursor:default; opacity:.7; }
+      .ctrl.tiny { padding:3px 8px; min-width:26px; }
+      .tempgrp { display:inline-flex; align-items:center; gap:4px; }
+      .temp { min-width:44px; text-align:center; font-size:11px; }
 
-        <script>
-            function createDoubleTapPreventer(timeout_ms: number) {
-              let dblTapTimer = 0;
-              let dblTapPressed = false;
+      /* BottomBar (lower) */
+      .bottombar { position:relative; background:rgba(20,20,20,.92); border-top:1px solid var(--line); grid-row:3; }
+      .databtn { padding:2px 8px; }
+      .databtn.active { background:#1b2a44; border-color:#2c4470; color:#cfe0ff; }
+      .env { position:absolute; left:12px; top:0; bottom:0; display:flex; align-items:center; gap:12px; overflow:hidden; max-width:calc(50% - 72px); }
+      .env-item { display:inline-flex; gap:4px; white-space:nowrap; }
+      .env-lbl { color:#a6a6a6; } .env-val { font-weight:700; }
+      .diat { display:inline-flex; gap:3px; white-space:nowrap; }
+      .diat-lbl { font-weight:700; } .diat-val { font-weight:400; }
 
-              return function (e: TouchEvent) {
-                  clearTimeout(dblTapTimer);
-                  if (dblTapPressed) {
-                      e.preventDefault();
-                      dblTapPressed = false;
-                  } else {
-                      dblTapPressed = true;
-                      dblTapTimer = setTimeout(() => {
-                          dblTapPressed = false;
-                      }, timeout_ms);
-                  }
-              };
-            }
+      /* Page nav pill */
+      .pagenav { position:absolute; left:50%; bottom:88px; transform:translateX(-50%); width:130px; height:30px;
+        display:flex; align-items:center; justify-content:space-between; background:rgba(26,26,26,1);
+        border:1px solid var(--line); border-radius:6px; z-index:5; }
+      .nav-btn { background:transparent; color:var(--fg); border:none; cursor:pointer; font-size:11px; padding:0 10px; height:100%; }
+      .nav-btn:hover { background:rgba(255,255,255,.07); }
+      .page-lbl { font-size:11px; }
 
-            document.body.addEventListener("touchstart", createDoubleTapPreventer(500), { passive: false });
-        </script>
+      /* Metrics: bottom-right */
+      .metrics { position:absolute; right:10px; top:50%; transform:translateY(-50%); display:flex; gap:10px;
+        font-size:9px; color:var(--dim); max-width:calc(50% - 72px); overflow:hidden; z-index:5; }
+      .metric { display:inline-flex; gap:4px; white-space:nowrap; }
+      .m-lbl { color:#5a6275; } .m-val { color:var(--fg); }
 
-        <link rel="stylesheet" type="text/css" href="style.css">
+      /* Status (errors) + pre-start bar holding the Start button */
+      #status { position:fixed; top:8px; left:8px; color:var(--dim); z-index:20; }
+      #prestart { position:fixed; left:0; right:0; bottom:0; height:44px; z-index:10;
+        display:flex; align-items:center; justify-content:center;
+        background:rgba(20,20,20,.92); border-top:1px solid var(--line); }
+      #start { background:#1b2a44; color:#cfe0ff; border:1px solid #2c4470; border-radius:4px;
+        cursor:pointer; font-size:11px; padding:4px 18px; font-family:inherit; }
+      #start:hover { background:#22365a; }
+      .bar-title { position:absolute; left:12px; top:50%; transform:translateY(-50%); font-weight:700; font-size:13px; color:var(--fg); }
 
-        <!-- Deshabilita el selector en móvil -->
-        <style>
-          body, html {
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-            -webkit-user-callout: none;
-            -webkit-user-callout: none;
-            -webkit-user-select: none;
-            -webkit-user-drag: none;
-            -webkit-user-modify: none;
-            -webkit-highlight: none;
-            touch-action: manipulation;
-          }
-          :root {
-            touch-action: pan-x pan-y;
-            height: 100%
-          }
-        </style>
+      /* Folded bar: collapses the two dashboard bars into one (Sonic Silica + Show). */
+      #foldbar { display:none; position:fixed; left:0; right:0; bottom:0; height:44px; z-index:6;
+        background:rgba(20,20,20,.92); border-top:1px solid var(--line); color:var(--fg); }
+      #foldbar.show { display:block; }
+      #fold-show { position:absolute; right:8px; top:50%; transform:translateY(-50%); }
 
-    </head>
-    <body onload="init();">
+      @media (max-width: 860px) {
+        .page0.active { grid-template-columns:1fr; grid-template-rows:repeat(4,1fr); }
+        .env { max-width:calc(50% - 50px); }
+        .env-lbl { display:none; }
+      }
 
-        <!-- 'stats' deshabilitados -->
-        <a-scene loading-screen="dotsColor: black; backgroundColor: aquamarine; enabled: false" obb-collider="showColliders: false" shadow="type: basic; autoUpdate: false;" renderer="antialias: true; colorManagement: true; physicallyCorrectLights: false; sortTransparentObjects: true; logarithmicDepthBuffer: true; precision: high; anisotropy: 2;">
-            <!-- Assets -->
-            <a-assets>
+      /* Responsive trim of the bars so the InfoBar right group never overlaps the
+         centered bay|date, and the metric readouts give way before the bottom-left data. */
+      @media (max-width: 768px) {
+        .voices { display:none; }            /* 1) voice counter */
+        .tempgrp { display:none; }           /* 2) temperature control — wide, must go to clear bay|date */
+        .metrics .metric { display:none; }   /* FPS/d-s/ms/pk/UI/eng go; Data button stays */
+      }
+      @media (max-width: 460px) {
+        .ib-right .ctrl[data-short] { font-size:0; padding:3px 7px; }                 /* 3) Pause/Reset/Mute -> P/R/M */
+        .ib-right .ctrl[data-short]::after { content:attr(data-short); font-size:10px; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===================== Colleague's code (unchanged) ===================== -->
+    <div id="card">
+      <model-viewer
+        src="https://laumamoff.github.io/mapping_the_invisible/Amphora.glb"
+        ios-src="https://laumamoff.github.io/mapping_the_invisible/Amphora.usdz"
+        alt="Mockup"
+        ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="2" autoplay auto-rotate shadow-softness="0.79" camera-orbit="313.6deg 88.34deg 51.52m" field-of-view="30deg"
+      >
+        <button id="qr-button"></button>
 
-        				<a-asset-item id="Center" src="./assets/Center.gltf"></a-asset-item>
-        				<a-asset-item id="Forest_2" src="./assets/Forest_2.gltf"></a-asset-item>
-        				<a-asset-item id="H1" src="./assets/H1.gltf"></a-asset-item>
-        				<a-asset-item id="Island_1" src="./assets/Island_1.gltf"></a-asset-item>
-        				<a-asset-item id="Island_2" src="./assets/Island_2.gltf"></a-asset-item>
-        				<a-asset-item id="MainIsland" src="./assets/MainIsland.gltf"></a-asset-item>
-        				<a-asset-item id="Mountains_1" src="./assets/Mountains_1.gltf"></a-asset-item>
-        				<a-asset-item id="Mountains_2" src="./assets/Mountains_2.gltf"></a-asset-item>
-        				<a-asset-item id="RIT_Logo" src="./assets/RIT_Logo.gltf"></a-asset-item>
-        				<a-asset-item id="TheOctagon" src="./assets/TheOctagon.gltf"></a-asset-item>
+        <button slot="ar-button" id="ar-button"></button>
+      </model-viewer>
+      <section class="attribution">
+      </section>
+    </div>
 
-                <img id="sky"                 src="./resources/sky.jpg">
-                <img id="icon-play"           src="./resources/play.png">
-                <img id="icon-pause"          src="./resources/pause.png">
-                <img id="icon-play-skip-back" src="./resources/play-skip-back.png">
-                <img id="icon-mute"           src="./resources/mute.png">
-                <img id="icon-volume-low"     src="./resources/volume-low.png">
-                <img id="icon-volume-high"    src="./resources/volume-high.png">
+    <!-- ===================== Sonic Silica overlay ===================== -->
+    <div id="status"></div>
+    <div id="dash"></div>
+    <div id="foldbar"><span class="bar-title">Sonic Silica</span><button id="fold-show" class="ctrl">Show</button></div>
+    <div id="prestart"><span class="bar-title">Sonic Silica</span><button id="start">&#9654; Start</button></div>
 
-            </a-assets>
+    <!-- Loads <model-viewer> for modern + legacy browsers -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
-            <!-- Entities -->
-
-			<a-entity id="#Center" gltf-model="#Center"  scale="1 1 1" position="0.12615780532360077 3.6527774333953857 -0.20377731323242188" visible="true" shadow="cast: false;" ></a-entity>
-			<a-entity id="#Forest_2" gltf-model="#Forest_2"  scale="1 1 1" position="35.366905212402344 3.961367130279541 1.1018842458724976" visible="true" shadow="cast: false;" ></a-entity>
-			<a-entity id="#H1" gltf-model="#H1"  scale="1 1 1" position="-145.8111114501953 15.507888793945312 -66.63512420654297" visible="true" shadow="cast: false;" ></a-entity>
-			<a-entity id="#Island_1" gltf-model="#Island_1"  scale="1 1 1" position="-31.165252685546875 14.794805526733398 -26.947162628173828" visible="true" shadow="cast: false;" ></a-entity>
-			<a-entity id="#Island_2" gltf-model="#Island_2"  scale="1 1 1" position="15.438913345336914 17.170825958251953 67.34014892578125" visible="true" shadow="cast: false;" ></a-entity>
-			<a-entity id="#MainIsland" gltf-model="#MainIsland"  scale="1 1 1" position="50.31312561035156 -42.340824127197266 -46.669761657714844" visible="true" shadow="cast: false;" ></a-entity>
-			<a-entity id="#Mountains_1" gltf-model="#Mountains_1"  scale="1 1 1" position="81.42040252685547 24.456270217895508 -31.35687255859375" visible="true" shadow="cast: false;" ></a-entity>
-			<a-entity id="#Mountains_2" gltf-model="#Mountains_2"  scale="1 1 1" position="6.104583263397217 20.60215187072754 -97.59709167480469" visible="true" shadow="cast: false;" ></a-entity>
-			<a-entity id="#RIT_Logo" gltf-model="#RIT_Logo"  scale="1 1 1" position="0.4867299795150757 13.15998649597168 0.014082828536629677" visible="true" shadow="cast: false;" ></a-entity>
-			<a-entity id="#TheOctagon" gltf-model="#TheOctagon"  scale="1 1 1" position="-79.28718566894531 27.71048927307129 74.17080688476562" visible="true" shadow="cast: false;" ></a-entity>
-
-            <!-- Camera -->
-            <a-entity id="player"
-                position="0 -0.2 0"
-                movement-controls="speed: 0.029999999329447746;">
-                <a-entity camera
-                    twoway-motion="speed: 35"
-                    camera="near: 0.001"
-                    wasd-controls="acceleration:50; fly: true"
-                    speed="0.5"
-                    position="0 1.7000000476837158 0"
-                    look-controls="pointerLockEnabled: true; touchEnabled: true">
-                        <a-entity id="cursor" cursor="fuse: false;" animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 50; from: 	0.1 0.1 0.1; to: 1 1 1"
-                            position="0 0 -0.1"
-                            geometry="primitive: circle; radius: 0;"
-                            material="color: #CCC; shader: flat;"
-                            >
-                        </a-entity>
-                </a-entity>
-            </a-entity>
-
-            <!-- Sky -->
-            <a-sky src="#sky" material="" geometry="" rotation="0 90 0"></a-sky>
-
-        </a-scene>
-
-    </body>
+    <!-- FMOD Studio HTML5 WASM SDK + Sonic Silica app -->
+    <script src="fmodstudio.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
 </html>
