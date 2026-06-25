@@ -62,7 +62,10 @@ async function ensureRuntime() {
         "). Serve the PUBLISH output (it contains the _framework/ folder); the source wwwroot does not.");
     }
   }
-  const runtime = await dotnet.withDiagnosticTracing(true).create();
+  const builder = dotnet.withDiagnosticTracing(true);
+  console.log("[boot] before create");
+  const runtime = await builder.create();
+  console.log("[boot] after create");
   console.log("[boot] runtime created");
   const { getAssemblyExports, getConfig } = runtime;
   const config = getConfig();
