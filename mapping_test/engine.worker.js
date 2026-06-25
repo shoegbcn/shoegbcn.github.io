@@ -2,10 +2,11 @@
 // thread. Posts lightweight per-tick state (~60 Hz) and a heavier graph/series
 // payload only on a day change (~3 Hz). Touches no DOM and no FMOD.
 
-// .NET runtime is imported dynamically (in ensureRuntime) rather than as a static
-// top-level import: a missing _framework/dotnet.js then yields a catchable, reportable
-// error instead of silently aborting the whole worker module.
-let dotnet = null;
+// .NET runtime is imported at top level (module worker) so the import fully settles
+// before any `init` message is handled. A lazy import triggered from inside the message
+// handler leaves dotnet.create() hanging on some static hosts (e.g. GitHub Pages); a
+// failed top-level import rejects worker module load -> surfaces via app.js worker.onerror.
+const { dotnet } = await import(new URL("./_framework/dotnet.js", import.meta.url).href);
 
 let Engine = null;
 let last = 0;
@@ -53,15 +54,6 @@ function resolveWasmBytes(runtime) {
 
 async function ensureRuntime() {
   if (runtimeReady) return;
-  if (!dotnet) {
-    const url = new URL("./_framework/dotnet.js", import.meta.url).href;
-    try {
-      ({ dotnet } = await import(url));
-    } catch (e) {
-      throw new Error("Could not load the .NET runtime at " + url + " (" + (e && e.message ? e.message : e) +
-        "). Serve the PUBLISH output (it contains the _framework/ folder); the source wwwroot does not.");
-    }
-  }
   const runtime = await dotnet.create();
   const { getAssemblyExports, getConfig } = runtime;
   const config = getConfig();
