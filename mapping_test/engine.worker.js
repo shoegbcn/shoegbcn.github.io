@@ -64,7 +64,10 @@ async function ensureRuntime() {
   }
   const builder = dotnet.withDiagnosticTracing(true);
   console.log("[boot] before create");
-  const runtime = await builder.create();
+  const runtime = await dotnet
+  .withDiagnosticTracing(true)
+  .withConfig({ globalizationMode: "invariant" })
+  .create();
   console.log("[boot] after create");
   console.log("[boot] runtime created");
   const { getAssemblyExports, getConfig } = runtime;
