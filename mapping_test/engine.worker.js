@@ -63,9 +63,13 @@ async function ensureRuntime() {
     }
   }
   const builder = dotnet.withDiagnosticTracing(true);
-  builder.withConfig({ globalizationMode: "invariant", resources: { icu: null } });
   console.log("[boot] before create");
-  const runtime = await builder.create();
+  const p = builder.create();
+  p.then(() => console.log("[boot] create RESOLVED"))
+   .catch(e => console.log("[boot] create REJECTED", e && (e.stack||e.message||e)));
+  const t = setInterval(() => console.log("[boot] still waiting", Date.now()), 1000);
+  const runtime = await p;
+  clearInterval(t);
   console.log("[boot] after create");
   console.log("[boot] runtime created");
   const { getAssemblyExports, getConfig } = runtime;
