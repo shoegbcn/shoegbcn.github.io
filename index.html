@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+    <!-- Generado con AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+    <!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->
+    <!-- Modificado y actualizado para AFrame 1.6.0 por Carlos Martorell -->
+    <head>
+        <title>WE ARE THE AI RESYNTHESIZERS x SHOEG</title>
+        <link rel="icon" type="image/png" href="favicon.ico"/>
+        <meta name="description" content="3D Application">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+        <script type="text/javascript" src="js/webxr.js"></script>
+        <script type="text/javascript" src="js/joystick.js"></script>
+        <script type="text/javascript" src="js/camera-cube-env.js"></script>
+        <script type="text/javascript" src="js/howler.js"></script>
+
+        <!-- Habilita el twoway-motion en móbil - Desplazamiento por toque de pantalla -->
+        <script src="https://rawgit.com/Ctrl-Alt-Zen/aframe-mobile-controls/master/components/twoway-motion/twoway-motion.js"></script>
+
+        <!-- Deshabilita el double tap / lupa en móvil -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0, user-scalable=no">
+
+        <!-- Música, con howler.js -->
+        <script>
+        let i;
+        let timer;
+        var sound = new Howl({
+          src: ['shoeg-liminal-state.mp3'],
+          autoplay: true,
+          loop: true,
+          volume: 0.5
+        });
+        let playTimer = true;
+        const timerDisplay = document.getElementById("timerDisplay");
+        const startTimerBtn = document.getElementById("startTimer");
+
+        function startTimer() {
+            i = 5;
+
+            timer = setInterval(() => {
+                if (playTimer) {
+                    if (i != 0) {
+                        timerDisplay.textContent = i;
+                        i--;
+                    }
+
+                    if (i == 0) {
+                        sound.play();
+                        clearInterval(timer);
+                    }
+                }
+            }, 1000);
+        }
+
+        // Add click event listener
+        startTimerBtn.addEventListener('click', startTimer);
+
+        // Add keydown event listener (e.g., for the 'Enter' key)
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                startTimer();
+            }
+        });
+
+        // Add touchstart event listener for mobile devices
+        startTimerBtn.addEventListener('touchstart', (event) => {
+            event.preventDefault(); // Prevents the default touch behavior
+            startTimer();
+        });
+        </script>
+
+        <script>
+            function createDoubleTapPreventer(timeout_ms: number) {
+              let dblTapTimer = 0;
+              let dblTapPressed = false;
+
+              return function (e: TouchEvent) {
+                  clearTimeout(dblTapTimer);
+                  if (dblTapPressed) {
+                      e.preventDefault();
+                      dblTapPressed = false;
+                  } else {
+                      dblTapPressed = true;
+                      dblTapTimer = setTimeout(() => {
+                          dblTapPressed = false;
+                      }, timeout_ms);
+                  }
+              };
+            }
+
+            document.body.addEventListener("touchstart", createDoubleTapPreventer(500), { passive: false });
+        </script>
+
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+        <!-- Deshabilita el selector en móvil -->
+        <style>
+          body, html {
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-user-callout: none;
+            -webkit-user-callout: none;
+            -webkit-user-select: none;
+            -webkit-user-drag: none;
+            -webkit-user-modify: none;
+            -webkit-highlight: none;
+            touch-action: manipulation;
+          }
+          :root {
+            touch-action: pan-x pan-y;
+            height: 100%
+          }
+        </style>
+
+    </head>
+    <body onload="init();">
+
+        <!-- 'stats' deshabilitados -->
+        <a-scene loading-screen="dotsColor: black; backgroundColor: aquamarine; enabled: false" obb-collider="showColliders: false" shadow="type: basic; autoUpdate: false;" renderer="antialias: true; colorManagement: true; physicallyCorrectLights: false; sortTransparentObjects: true; logarithmicDepthBuffer: true; precision: high; anisotropy: 2;">
+            <!-- Assets -->
+            <a-assets>
+
+        				<a-asset-item id="Center" src="./assets/Center.gltf"></a-asset-item>
+        				<a-asset-item id="Forest_2" src="./assets/Forest_2.gltf"></a-asset-item>
+        				<a-asset-item id="H1" src="./assets/H1.gltf"></a-asset-item>
+        				<a-asset-item id="Island_1" src="./assets/Island_1.gltf"></a-asset-item>
+        				<a-asset-item id="Island_2" src="./assets/Island_2.gltf"></a-asset-item>
+        				<a-asset-item id="MainIsland" src="./assets/MainIsland.gltf"></a-asset-item>
+        				<a-asset-item id="Mountains_1" src="./assets/Mountains_1.gltf"></a-asset-item>
+        				<a-asset-item id="Mountains_2" src="./assets/Mountains_2.gltf"></a-asset-item>
+        				<a-asset-item id="RIT_Logo" src="./assets/RIT_Logo.gltf"></a-asset-item>
+        				<a-asset-item id="TheOctagon" src="./assets/TheOctagon.gltf"></a-asset-item>
+
+                <img id="sky"                 src="./resources/sky.jpg">
+                <img id="icon-play"           src="./resources/play.png">
+                <img id="icon-pause"          src="./resources/pause.png">
+                <img id="icon-play-skip-back" src="./resources/play-skip-back.png">
+                <img id="icon-mute"           src="./resources/mute.png">
+                <img id="icon-volume-low"     src="./resources/volume-low.png">
+                <img id="icon-volume-high"    src="./resources/volume-high.png">
+
+            </a-assets>
+
+            <!-- Entities -->
+
+			<a-entity id="#Center" gltf-model="#Center"  scale="1 1 1" position="0.12615780532360077 3.6527774333953857 -0.20377731323242188" visible="true" shadow="cast: false;" ></a-entity>
+			<a-entity id="#Forest_2" gltf-model="#Forest_2"  scale="1 1 1" position="35.366905212402344 3.961367130279541 1.1018842458724976" visible="true" shadow="cast: false;" ></a-entity>
+			<a-entity id="#H1" gltf-model="#H1"  scale="1 1 1" position="-145.8111114501953 15.507888793945312 -66.63512420654297" visible="true" shadow="cast: false;" ></a-entity>
+			<a-entity id="#Island_1" gltf-model="#Island_1"  scale="1 1 1" position="-31.165252685546875 14.794805526733398 -26.947162628173828" visible="true" shadow="cast: false;" ></a-entity>
+			<a-entity id="#Island_2" gltf-model="#Island_2"  scale="1 1 1" position="15.438913345336914 17.170825958251953 67.34014892578125" visible="true" shadow="cast: false;" ></a-entity>
+			<a-entity id="#MainIsland" gltf-model="#MainIsland"  scale="1 1 1" position="50.31312561035156 -42.340824127197266 -46.669761657714844" visible="true" shadow="cast: false;" ></a-entity>
+			<a-entity id="#Mountains_1" gltf-model="#Mountains_1"  scale="1 1 1" position="81.42040252685547 24.456270217895508 -31.35687255859375" visible="true" shadow="cast: false;" ></a-entity>
+			<a-entity id="#Mountains_2" gltf-model="#Mountains_2"  scale="1 1 1" position="6.104583263397217 20.60215187072754 -97.59709167480469" visible="true" shadow="cast: false;" ></a-entity>
+			<a-entity id="#RIT_Logo" gltf-model="#RIT_Logo"  scale="1 1 1" position="0.4867299795150757 13.15998649597168 0.014082828536629677" visible="true" shadow="cast: false;" ></a-entity>
+			<a-entity id="#TheOctagon" gltf-model="#TheOctagon"  scale="1 1 1" position="-79.28718566894531 27.71048927307129 74.17080688476562" visible="true" shadow="cast: false;" ></a-entity>
+
+            <!-- Camera -->
+            <a-entity id="player"
+                position="0 -0.2 0"
+                movement-controls="speed: 0.029999999329447746;">
+                <a-entity camera
+                    twoway-motion="speed: 35"
+                    camera="near: 0.001"
+                    wasd-controls="acceleration:50; fly: true"
+                    speed="0.5"
+                    position="0 1.7000000476837158 0"
+                    look-controls="pointerLockEnabled: true; touchEnabled: true">
+                        <a-entity id="cursor" cursor="fuse: false;" animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 50; from: 	0.1 0.1 0.1; to: 1 1 1"
+                            position="0 0 -0.1"
+                            geometry="primitive: circle; radius: 0;"
+                            material="color: #CCC; shader: flat;"
+                            >
+                        </a-entity>
+                </a-entity>
+            </a-entity>
+
+            <!-- Sky -->
+            <a-sky src="#sky" material="" geometry="" rotation="0 90 0"></a-sky>
+
+        </a-scene>
+
+    </body>
+</html>
